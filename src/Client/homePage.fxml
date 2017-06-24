@@ -24,7 +24,7 @@
          </image>
       </ImageView>
       <Line endX="540.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="879.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="80.0" />
-      <ListView fx:id="posts" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="82.0" />
+      <ListView fx:id="posts" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4; -fx-padding: 0;" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0" />
         <Line endX="540.0" layoutX="270.0" layoutY="750.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="879.0" />
       <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="892.0">
          <image>

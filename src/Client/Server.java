@@ -28,8 +28,6 @@ public class Server {
             profiles = new ArrayList<>();
             clients = new ArrayList<>();
             initializeProfiles();
-            postBesaz();
-
             while (true){
                 clientSocket = serverSocket.accept();
                 Thread clientsThread = new Thread(new ClientHandler(clientSocket));
@@ -122,14 +120,6 @@ public class Server {
             serialize(p);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    static void postBesaz(){
-        Profile test = ClientHandler.profileFinder("parsa");
-        for (int i=0; i<3; i++){
-            File f = new File("/Users/parsahejabi/Pictures/Fsociety/" + Integer.toString(i+1) + ".jpg");
-            createPost(test, f, true, Integer.toString(i+1));
         }
     }
 }

@@ -20,7 +20,7 @@ public class Post implements Comparable,Serializable {
 
     @Override
     public int compareTo(Object o) {
-        return uploadDate.compareTo(((Post) o).uploadDate);
+        return ((Post) o).uploadDate.compareTo(this.uploadDate);
     }
 
     Post(Profile owner, File image, String  caption, boolean canComment)

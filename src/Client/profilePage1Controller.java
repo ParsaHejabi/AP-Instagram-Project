@@ -50,13 +50,6 @@ public class profilePage1Controller implements Initializable{
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage2.fxml")));
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Profile");
-        profilePicture.setFill(new ImagePattern(new Image(Client.profileOwner.profilePicture.getAbsolutePath())));
-        fullName.setText(Client.profileOwner.fullName);
-        biography.setText(Client.profileOwner.biography);
-        followerNum.setText(Integer.toString(Client.profileOwner.followers.size()));
-        followingNum.setText(Integer.toString(Client.profileOwner.following.size()));
-        postNum.setText(Integer.toString(Client.profileOwner.posts.size()));
-        username.setText(Client.profileOwner.username);
     }
 
     public void goToHome() throws IOException, ClassNotFoundException {

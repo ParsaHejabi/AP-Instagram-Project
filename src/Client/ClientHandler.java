@@ -127,8 +127,15 @@ public class ClientHandler implements Runnable{
                 if (clientMessage.equals("Profile1"))
                 {
                 }
-                else if ( clientMessage.equals("Profile2"))
-                {
+                else if ( clientMessage.equals("Profile2")) {
+                    Profile currentClient = profileFinder(username);
+                    ArrayList<Post> postsToShow = new ArrayList<>();
+                    for (Post post: currentClient.posts){
+                        postsToShow.add(post);
+                    }
+                    clientOutputStream.reset();
+                    clientOutputStream.writeObject(postsToShow);
+                    clientOutputStream.flush();
                 }
                 else if (clientMessage.equals("Home"))
                 {
@@ -142,6 +149,7 @@ public class ClientHandler implements Runnable{
                     for (Post post: currentClient.posts){
                         postsToShow.add(post);
                     }
+                    postsToShow.sort(null);
                     clientOutputStream.reset();
                     clientOutputStream.writeObject(postsToShow);
                     clientOutputStream.flush();
