@@ -39,10 +39,7 @@ public class peoplePageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             Client.refreshOwner();
-
-
             requestedProfile = ((Profile) Client.clientInputStream.readObject());
-            System.out.println("initilize seda shod");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -59,14 +56,12 @@ public class peoplePageController implements Initializable {
         username.setText(requestedProfile.username);
 
         if (Client.profileOwner.following.contains(requestedProfile)){
-            System.out.println("no");
             followUnfollowButton.setText("Following");
             followUnfollowButton.setStyle("-fx-background-color:#f4f4f4;" +
                     "-fx-text-fill:black;" +
                     "-fx-border-color:black;");
         }
         else {
-            System.out.println("yes");
             followUnfollowButton.setText("Follow");
             followUnfollowButton.setStyle("-fx-background-color:#3897f0;" +
                     "-fx-text-fill:white;" +
@@ -88,24 +83,20 @@ public class peoplePageController implements Initializable {
     }
 
     public void goToProfile1() throws IOException, ClassNotFoundException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
-        ClientUI.sceneChanger(scene, "Profile");
         Client.clientOutputStream.writeUTF("Exit");
         Client.clientOutputStream.writeUTF("Profile1");
         Client.clientOutputStream.flush();
-        Client.refreshOwner();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Profile");
     }
     public void goToHome() throws IOException, ClassNotFoundException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
-        ClientUI.sceneChanger(scene, "Home");
         Client.clientOutputStream.writeUTF("Exit");
         Client.clientOutputStream.writeUTF("Home");
         Client.clientOutputStream.flush();
-        Client.refreshOwner();
-
-
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Home");
     }
 
     public void goToSearch() throws IOException, ClassNotFoundException {
@@ -115,18 +106,14 @@ public class peoplePageController implements Initializable {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("searchPage.fxml")));
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Search");
-        Client.refreshOwner();
     }
 
     private void goToPeople(Profile p) throws IOException, ClassNotFoundException {
 
         Client.clientOutputStream.writeUTF("People:" + p.username);
         Client.clientOutputStream.flush();
-        System.out.println("ghable refresh");
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("peoplePage.fxml")));
-        System.out.println("bade refresh");
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "People");
-
     }
 }

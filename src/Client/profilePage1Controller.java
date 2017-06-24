@@ -37,21 +37,19 @@ public class profilePage1Controller implements Initializable{
     private Label username;
 
     public void goToProfile1() throws IOException, ClassNotFoundException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
-        ClientUI.sceneChanger(scene, "Set ProfilePicture");
         Client.clientOutputStream.writeUTF("Profile1");
         Client.clientOutputStream.flush();
-        Client.refreshOwner();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Profile");
     }
     public void goToProfile2() throws IOException, ClassNotFoundException
     {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage2.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
-        ClientUI.sceneChanger(scene, "Set ProfilePicture");
         Client.clientOutputStream.writeUTF("Profile2");
         Client.clientOutputStream.flush();
-        Client.refreshOwner();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage2.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Profile");
         profilePicture.setFill(new ImagePattern(new Image(Client.profileOwner.profilePicture.getAbsolutePath())));
         fullName.setText(Client.profileOwner.fullName);
         biography.setText(Client.profileOwner.biography);
@@ -62,27 +60,30 @@ public class profilePage1Controller implements Initializable{
     }
 
     public void goToHome() throws IOException, ClassNotFoundException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
-        ClientUI.sceneChanger(scene, "Set ProfilePicture");
         Client.clientOutputStream.writeUTF("Home");
         Client.clientOutputStream.flush();
-        Client.refreshOwner();
-
-
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Home");
     }
 
     public void goToSearch() throws IOException, ClassNotFoundException {
+        Client.clientOutputStream.writeUTF("Search");
+        Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("searchPage.fxml")));
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Search");
-        Client.clientOutputStream.writeUTF("Search");
-        Client.clientOutputStream.flush();
-        Client.refreshOwner();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            Client.refreshOwner();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         profilePicture.setFill(new ImagePattern(new Image(Client.profileOwner.profilePicture.toURI().toString())));
         fullName.setText(Client.profileOwner.fullName);
         biography.setText(Client.profileOwner.biography);

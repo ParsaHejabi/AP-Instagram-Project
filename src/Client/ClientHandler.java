@@ -132,6 +132,19 @@ public class ClientHandler implements Runnable{
                 }
                 else if (clientMessage.equals("Home"))
                 {
+                    Profile currentClient = profileFinder(username);
+                    ArrayList<Post> postsToShow = new ArrayList<>();
+                    for (Profile profile: currentClient.following){
+                        for (Post post: profile.posts){
+                            postsToShow.add(post);
+                        }
+                    }
+                    for (Post post: currentClient.posts){
+                        postsToShow.add(post);
+                    }
+                    clientOutputStream.reset();
+                    clientOutputStream.writeObject(postsToShow);
+                    clientOutputStream.flush();
                 }
                 else if (clientMessage.equals("Search"))
                 {
@@ -231,7 +244,7 @@ public class ClientHandler implements Runnable{
         return false;
     }
 
-    private Profile profileFinder(String usernameOrEmail){
+    public static Profile profileFinder(String usernameOrEmail){
         for (Profile p:Server.profiles){
             if (isEmailValid(usernameOrEmail)){
                 if (usernameOrEmail.equals(p.email)){

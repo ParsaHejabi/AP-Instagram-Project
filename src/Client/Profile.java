@@ -52,8 +52,5 @@ public class Profile implements Serializable{
     }
 
 }
-class Test{
-
-}
 
 

@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -27,6 +28,7 @@ public class Server {
             profiles = new ArrayList<>();
             clients = new ArrayList<>();
             initializeProfiles();
+            postBesaz();
 
             while (true){
                 clientSocket = serverSocket.accept();
@@ -105,5 +107,29 @@ public class Server {
                 ps.add(p);
         }
         return ps;
+    }
+
+    static void createPost(Profile p, File f, boolean canComment, String caption){
+        File ax = new File(profilesDir, p.username+"/"+Post.POST_NAME+Integer.toString(p.posts.size()));
+        try {
+            Files.write(ax.toPath(), Files.readAllBytes(f.toPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Post post = new Post(p, ax, caption, canComment);
+        p.posts.add(post);
+        try {
+            serialize(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void postBesaz(){
+        Profile test = ClientHandler.profileFinder("parsa");
+        for (int i=0; i<3; i++){
+            File f = new File("/Users/parsahejabi/Pictures/Fsociety/" + Integer.toString(i+1) + ".jpg");
+            createPost(test, f, true, Integer.toString(i+1));
+        }
     }
 }

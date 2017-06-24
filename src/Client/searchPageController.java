@@ -34,6 +34,13 @@ public class searchPageController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
+        try {
+            Client.refreshOwner();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             Client.sendMessage("SearchProfile:"+newValue);
             if(newValue.length()>2) {
@@ -93,28 +100,23 @@ public class searchPageController implements Initializable{
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("peoplePage.fxml")));
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "People");
-
     }
 
     public void goToHome() throws IOException, ClassNotFoundException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
-        ClientUI.sceneChanger(scene, "Set ProfilePicture");
         Client.clientOutputStream.writeUTF("Exit");
         Client.clientOutputStream.writeUTF("Home");
         Client.clientOutputStream.flush();
-        Client.refreshOwner();
-
-
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Home");
     }
 
     public void goToProfile1() throws IOException, ClassNotFoundException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
-        ClientUI.sceneChanger(scene, "Set ProfilePicture");
         Client.clientOutputStream.writeUTF("Exit");
         Client.clientOutputStream.writeUTF("Profile1");
         Client.clientOutputStream.flush();
-        Client.refreshOwner();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Profile");
     }
 }
