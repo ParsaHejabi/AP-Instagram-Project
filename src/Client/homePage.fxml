@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.homePageController">
+    <children>
+      <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="22.0">
+         <image>
+            <Image url="@Assets/storyButton.png" />
+         </image>
+      </ImageView>
+        <ImageView fitHeight="56.0" fitWidth="145.0" layoutX="197.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="894.2350006103516" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="198.0" AnchorPane.topAnchor="14.0">
+            <image>
+                <Image url="@Assets/Instagram_logo.png" />
+            </image>
+        </ImageView>
+      <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="22.0">
+         <image>
+            <Image url="@Assets/directButton.png" />
+         </image>
+      </ImageView>
+      <Line endX="540.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="879.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="80.0" />
+        <Line endX="540.0" layoutX="270.0" layoutY="750.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="879.0" />
+      <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="892.0">
+         <image>
+            <Image url="@Assets/onHome.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToSearch" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="131.0" AnchorPane.rightAnchor="464.0" AnchorPane.topAnchor="892.0">
+         <image>
+            <Image url="@Assets/offExplore.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="892.0">
+         <image>
+            <Image url="@Assets/offShare.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="353.0" AnchorPane.rightAnchor="131.0" AnchorPane.topAnchor="892.0">
+         <image>
+            <Image url="@Assets/offNews.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="106.0" layoutY="889.0" onMouseClicked="#goToProfile1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="464.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="892.0">
+         <image>
+            <Image url="@Assets/offProfile.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>
