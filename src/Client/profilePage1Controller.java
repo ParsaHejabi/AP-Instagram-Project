@@ -85,4 +85,13 @@ public class profilePage1Controller implements Initializable{
         postNum.setText(Integer.toString(Client.profileOwner.posts.size()));
         username.setText(Client.profileOwner.username);
     }
+
+    public void goToShare() throws IOException, ClassNotFoundException{
+
+        Client.clientOutputStream.writeUTF("Share");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Share");
+    }
 }

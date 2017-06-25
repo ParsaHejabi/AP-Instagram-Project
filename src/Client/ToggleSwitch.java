@@ -28,21 +28,20 @@ public class ToggleSwitch extends Parent{
     }
 
     public ToggleSwitch() {
-        Rectangle background = new Rectangle(50, 25);
-        background.setArcWidth(25);
-        background.setArcHeight(25);
-        background.setFill(Color.rgb(153,153,153));
+        Rectangle background = new Rectangle(75, 35);
+        background.setArcWidth(35);
+        background.setArcHeight(35);
+        background.setFill(Color.rgb(144,144,144));
         background.setStroke(Color.LIGHTGRAY);
 
         Circle trigger = new Circle(8.5);
-        trigger.setCenterX(12.5);
-        trigger.setCenterY(12.5);
+        trigger.setCenterX(17.5);
+        trigger.setCenterY(17.5);
         trigger.setFill(Color.WHITE);
-        trigger.setStroke(Color.LIGHTGRAY);
 
-        DropShadow shadow = new DropShadow();
-        shadow.setRadius(3);
-        trigger.setEffect(shadow);
+//        DropShadow shadow = new DropShadow();
+//        shadow.setRadius(15);
+//        trigger.setEffect(shadow);
 
         translateAnimation.setNode(trigger);
         fillAnimation.setShape(background);
@@ -51,9 +50,9 @@ public class ToggleSwitch extends Parent{
 
         switchedOn.addListener((obs, oldState, newState) -> {
             boolean isOn = newState.booleanValue();
-            translateAnimation.setToX(isOn ? 50 - 25 : 0);
-            fillAnimation.setFromValue(isOn ? Color.WHITE : Color.rgb(56,151,240));
-            fillAnimation.setToValue(isOn ? Color.rgb(56,151,240) : Color.WHITE);
+            translateAnimation.setToX(isOn ? 75 - 35 : 0);
+            fillAnimation.setFromValue(isOn ? Color.rgb(144,144,144) : Color.rgb(56,151,240));
+            fillAnimation.setToValue(isOn ? Color.rgb(56,151,240) : Color.rgb(144,144,144));
 
             animation.play();
         });

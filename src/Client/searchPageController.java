@@ -119,4 +119,13 @@ public class searchPageController implements Initializable{
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Profile");
     }
+
+    public void goToShare() throws IOException, ClassNotFoundException{
+        Client.clientOutputStream.writeUTF("Exit");
+        Client.clientOutputStream.writeUTF("Share");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Share");
+    }
 }

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.searchPageController">
+<AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.likesPageController">
     <children>
-        <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="17.0">
+        <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#goToSearch" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
             <image>
-                <Image url="@Assets/onExplore.png" />
+                <Image url="@Assets/back.png" />
             </image>
         </ImageView>
-      <TextField fx:id="searchField" promptText="Search" style="-fx-border-color: #f4f4f4; -fx-background-color: #f4f4f4;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="18.0">
-         <font>
-            <Font name="Helvetica Light" size="22.0" />
-         </font>
-      </TextField>
+        <Label fx:id="username" text="Likes" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="25.0">
+            <font>
+                <Font name="Helvetica" size="25.0" />
+            </font>
+        </Label>
         <Line endX="540.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="879.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="80.0" />
-      <ListView fx:id="searchResult" editable="true" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="82.0" />
+      <ListView fx:id="likesListView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="82.0" />
         <Line endX="540.0" layoutX="270.0" layoutY="750.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="879.0" />
         <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="892.0">
             <image>
-                <Image url="@Assets/offHome.png" />
+                <Image url="@Assets/onHome.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="131.0" AnchorPane.rightAnchor="464.0" AnchorPane.topAnchor="892.0">
+        <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToSearch" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="131.0" AnchorPane.rightAnchor="464.0" AnchorPane.topAnchor="892.0">
             <image>
-                <Image url="@Assets/onExplore.png" />
+                <Image url="@Assets/offExplore.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToShare" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="892.0">

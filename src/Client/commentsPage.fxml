@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.commentsPageController">
+    <children>
+        <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+            <image>
+                <Image url="@Assets/back.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="username" text="Comments" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="25.0">
+            <font>
+                <Font name="Helvetica" size="25.0" />
+            </font>
+        </Label>
+        <Line endX="540.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="879.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="80.0" />
+      <ListView fx:id="commentsListView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="82.0" />
+        <Line endX="540.0" layoutX="270.0" layoutY="750.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="879.0" />
+      <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0">
+         <image>
+            <Image url="@Assets/shareButton.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="commentTextField" prefHeight="60.0" promptText="Add a comment..." style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0">
+         <font>
+            <Font name="Helvetica" size="17.0" />
+         </font>
+      </TextField>
+      <Pane fx:id="sendCommentPane" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #3897f0;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" translateX="20.0" translateY="20.0">
+               <image>
+                  <Image url="@Assets/whiteCheckButton.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

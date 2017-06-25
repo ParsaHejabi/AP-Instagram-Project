@@ -75,6 +75,15 @@ public class profilePage2Controller implements Initializable {
         ClientUI.sceneChanger(scene, "Search");
     }
 
+    public void goToShare() throws IOException, ClassNotFoundException{
+
+        Client.clientOutputStream.writeUTF("Share");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Share");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -130,7 +139,7 @@ public class profilePage2Controller implements Initializable {
             Label postDateLabel = new Label(postsToShow.get(i).uploadDate.toString());
             if (!postCaptionTextArea.getText().isEmpty()){
                 if (postsToShow.get(i).canComment){
-                    Hyperlink commentHyperlink = new Hyperlink("View all " + postsToShow.get(i).comments.size() + " comments");
+                    Hyperlink commentHyperlink = new Hyperlink("View all " + postsToShow.get(i).comments.size() + " commentsListView");
                     post.getChildren().addAll(postOwnerHBox, postImageView, postButtonsHBox, likesHyperlink, postOwnerUsernameHyperLink, postCaptionTextArea, commentHyperlink, postDateLabel);
                 }
                 else{
@@ -139,7 +148,7 @@ public class profilePage2Controller implements Initializable {
             }
             else{
                 if (postsToShow.get(i).canComment){
-                    Hyperlink commentHyperlink = new Hyperlink("View all " + postsToShow.get(i).comments.size() + " comments");
+                    Hyperlink commentHyperlink = new Hyperlink("View all " + postsToShow.get(i).comments.size() + " commentsListView");
                     post.getChildren().addAll(postOwnerHBox, postImageView, postButtonsHBox, likesHyperlink, postOwnerUsernameHyperLink, commentHyperlink, postDateLabel);
                 }
                 else{
