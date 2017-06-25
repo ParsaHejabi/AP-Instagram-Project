@@ -37,7 +37,7 @@ public class ClientHandler implements Runnable{
         try {
             clientOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             clientInputStream = new ObjectInputStream(clientSocket.getInputStream());
-
+            //halghe signup va login
             do {
                 clientMessage = clientInputStream.readUTF();
                 System.out.println(Thread.currentThread().getName() + " said: " + clientMessage);
@@ -127,17 +127,16 @@ public class ClientHandler implements Runnable{
                 if (clientMessage.equals("Profile1"))
                 {
                 }
-                else if ( clientMessage.equals("Profile2")) {
-                    Profile currentClient = profileFinder(username);
+                if ( clientMessage.equals("Profile2"))
+                 {Profile currentClient = profileFinder(username);
                     ArrayList<Post> postsToShow = new ArrayList<>();
                     for (Post post: currentClient.posts){
                         postsToShow.add(post);
                     }
                     clientOutputStream.reset();
                     clientOutputStream.writeObject(postsToShow);
-                    clientOutputStream.flush();
-                }
-                else if (clientMessage.equals("Home"))
+                    clientOutputStream.flush();}
+                if (clientMessage.equals("Home"))
                 {
                     Profile currentClient = profileFinder(username);
                     ArrayList<Post> postsToShow = new ArrayList<>();
@@ -154,9 +153,8 @@ public class ClientHandler implements Runnable{
                     clientOutputStream.writeObject(postsToShow);
                     clientOutputStream.flush();
                 }
-                else if (clientMessage.equals("Search"))
-                {
-                    String userCommand;
+                if (clientMessage.equals("Search"))
+                {String userCommand;
                     System.out.println("in search mode");
                     do{
                         userCommand = clientInputStream.readUTF();
@@ -199,15 +197,11 @@ public class ClientHandler implements Runnable{
                                     Server.serialize(requestedProfile);
                                     Server.serialize(currentClient);
                                 }
-                            }
-
-
-
-                        }
+                            }}
 
                     }while (!userCommand.equals("Exit"));
                 }
-                else if(clientMessage.equals("Share"))
+                if(clientMessage.equals("Share"))
                 {
                     clientMessage = clientInputStream.readUTF();
                     if (clientMessage.equals("SharePost"))
@@ -219,6 +213,56 @@ public class ClientHandler implements Runnable{
                         Server.createPost(curentClient,f, canComment, caption);
                     }
 
+
+                }
+                if(clientMessage.contains("Like"))
+                {
+                    //token0 Like hast, token1 profile hast, token2 post identifier hast.
+                    String[] tokens = clientMessage.split(":",3);
+                    Profile currentClient = profileFinder(username);
+                    Profile requestedClient = profileFinder(tokens[1]);
+                    Post requestedPost = postFinder(requestedClient, tokens[2]);
+                    if(requestedPost.liked.contains(currentClient))
+                    {
+                        requestedPost.liked.remove(currentClient);
+                    }
+                    else
+                    {
+                        requestedPost.liked.add(currentClient);
+                    }
+                    Server.serialize(requestedClient);
+
+                }
+                if(clientMessage.contains("ViewLikes"))
+                {
+                    //token0 ViewLikes hast, token1 profile hast, token2 post identifier hast.
+                    String[] tokens = clientMessage.split(":",3);
+                    Profile currentClient = profileFinder(username);
+                    Profile requestedClient = profileFinder(tokens[1]);
+                    Post requestedPost = postFinder(requestedClient, tokens[2]);
+                    clientOutputStream.writeObject(requestedPost.liked);
+                    clientOutputStream.flush();
+                }
+                if(clientMessage.contains("ViewComments"))
+                {
+                    String[] tokens = clientMessage.split(":",3);
+                    Profile currentClient = profileFinder(username);
+                    Profile requestedClient = profileFinder(tokens[1]);
+                    Post requestedPost = postFinder(requestedClient, tokens[2]);
+                    clientOutputStream.writeObject(requestedPost.comments);
+                    clientOutputStream.flush();
+                }
+                if(clientMessage.contains("SendComment"))
+                {
+                    //token aval send comment , dovom username taraf, sevom id post
+                    String[] tokens = clientMessage.split(":",3);
+                    String commentText = clientInputStream.readUTF();
+                    Profile currentClient = profileFinder(username);
+                    Profile requestedClient = profileFinder(tokens[1]);
+                    Post requestedPost = postFinder(requestedClient, tokens[2]);
+                    Comment comment = new Comment(currentClient, commentText);
+                    requestedPost.comments.add(comment);
+                    Server.serialize(requestedClient);
 
                 }
             }while (!clientMessage.equals("Exit"));
@@ -288,5 +332,17 @@ public class ClientHandler implements Runnable{
         clientOutputStream.reset();
         clientOutputStream.writeObject(profile);
         clientOutputStream.flush();
+    }
+
+    private static Post postFinder(Profile profile, String id)
+    {
+        for (Post p: profile.posts)
+        {
+            if(p.id.equals(id))
+            {
+                return p;
+            }
+        }
+        return null;
     }
 }

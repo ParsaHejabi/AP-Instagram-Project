@@ -12,6 +12,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
@@ -83,18 +84,48 @@ public class homePageController implements Initializable{
             HBox postButtonsHBox = new HBox(10);
             postButtonsHBox.setAlignment(Pos.CENTER_LEFT);
             ImageView likeButtonImageView = new ImageView("Client/Assets/likeButton.png");
+
             likeButtonImageView.setFitWidth(45);
             likeButtonImageView.setFitHeight(45);
             if (p.canComment){
                 ImageView commentButtonImageView = new ImageView("Client/Assets/commentButton.png");
                 commentButtonImageView.setFitWidth(45);
                 commentButtonImageView.setFitHeight(45);
+                commentButtonImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                    String command = "ViewComments:"+p.owner.username+":"+p.id;
+
+                    try {
+                        Client.clientOutputStream.writeUTF(command);
+                        Client.clientOutputStream.flush();
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
+                        scene.getStylesheets().add("Stylesheet/style.css");
+                        ClientUI.sceneChanger(scene, "Comments");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    event.consume();
+
+                });
                 postButtonsHBox.getChildren().addAll(likeButtonImageView, commentButtonImageView);
             }
             else {
                 postButtonsHBox.getChildren().add(likeButtonImageView);
             }
             Hyperlink likesHyperlink = new Hyperlink(p.liked.size() + " likes");
+            likesHyperlink.setOnAction(event -> {
+                String command = "ViewLikes:"+p.owner.username+":"+p.id;
+
+                try {
+                    Client.clientOutputStream.writeUTF(command);
+                    Client.clientOutputStream.flush();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("likesPage.fxml")));
+                    scene.getStylesheets().add("Stylesheet/style.css");
+                    ClientUI.sceneChanger(scene, "Likes");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
             likesHyperlink.setPadding(new Insets(0));
             Hyperlink postOwnerUsernameHyperLink = new Hyperlink(p.owner.username);
             postOwnerUsernameHyperLink.setPadding(new Insets(0));
@@ -104,6 +135,19 @@ public class homePageController implements Initializable{
             if (!postCaptionTextArea.getText().isEmpty()){
                 if (p.canComment){
                     Hyperlink commentHyperlink = new Hyperlink("View all " + p.comments.size() + " comments");
+                    commentHyperlink.setOnAction(event -> {
+                        String command = "ViewComments:"+p.owner.username+":"+p.id;
+
+                        try {
+                            Client.clientOutputStream.writeUTF(command);
+                            Client.clientOutputStream.flush();
+                            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
+                            scene.getStylesheets().add("Stylesheet/style.css");
+                            ClientUI.sceneChanger(scene, "Comments");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                     post.getChildren().addAll(postOwnerHBox, postImageView, postButtonsHBox, likesHyperlink, postOwnerUsernameHyperLink, postCaptionTextArea, commentHyperlink, postDateLabel);
                 }
                 else{
@@ -113,12 +157,53 @@ public class homePageController implements Initializable{
             else{
                 if (p.canComment){
                     Hyperlink commentHyperlink = new Hyperlink("View all " + p.comments.size() + " comments");
+                    commentHyperlink.setOnAction(event -> {
+                        String command = "ViewComments:"+p.owner.username+":"+p.id;
+
+                        try {
+                            Client.clientOutputStream.writeUTF(command);
+                            Client.clientOutputStream.flush();
+                            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
+                            scene.getStylesheets().add("Stylesheet/style.css");
+                            ClientUI.sceneChanger(scene, "Comments");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                     post.getChildren().addAll(postOwnerHBox, postImageView, postButtonsHBox, likesHyperlink, postOwnerUsernameHyperLink, commentHyperlink, postDateLabel);
                 }
                 else{
                     post.getChildren().addAll(postOwnerHBox, postImageView, postButtonsHBox, likesHyperlink, postOwnerUsernameHyperLink, postDateLabel);
                 }
             }
+            likeButtonImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                String command = "Like:"+p.owner.username+":"+p.id;
+
+                try {
+                    Client.clientOutputStream.writeUTF(command);
+                        Client.refreshOwner();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+
+            if(p.liked.contains(Client.profileOwner))
+                {
+                    p.liked.remove(Client.profileOwner);
+                    likesHyperlink.setText(p.liked.size() + " likes");
+                }
+                else {
+                    p.liked.add((Client.profileOwner));
+                    likesHyperlink.setText(p.liked.size()+ " likes");
+                }
+
+                //todo: axesh avaz she vaghti like kard;
+                event.consume();
+
+            });
             posts.getItems().addAll(post);
         }
 
