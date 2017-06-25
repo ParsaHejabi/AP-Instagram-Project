@@ -17,6 +17,7 @@ public class Post implements Comparable,Serializable {
     ArrayList<Comment> comments;
     String caption;
     boolean canComment;
+    int id;
 
     @Override
     public int compareTo(Object o) {
@@ -27,6 +28,7 @@ public class Post implements Comparable,Serializable {
     {
         this.uploadDate = new Date(System.currentTimeMillis());
         this.owner = owner;
+        this.id = owner.posts.size();
         this.canComment = canComment;
         if(canComment)
             comments = new ArrayList<>();
