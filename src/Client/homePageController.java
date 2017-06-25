@@ -56,6 +56,16 @@ public class homePageController implements Initializable{
         ClientUI.sceneChanger(scene, "Search");
     }
 
+    public void goToShare() throws IOException, ClassNotFoundException{
+
+        //this will nullify the readUTF in sharePage
+        Client.clientOutputStream.writeUTF("Share");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Share");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -84,14 +94,15 @@ public class homePageController implements Initializable{
             HBox postButtonsHBox = new HBox(10);
             postButtonsHBox.setAlignment(Pos.CENTER_LEFT);
             ImageView likeButtonImageView = new ImageView("Client/Assets/likeButton.png");
-
+            likeButtonImageView.setPickOnBounds(true);
             likeButtonImageView.setFitWidth(45);
             likeButtonImageView.setFitHeight(45);
             if (p.canComment){
                 ImageView commentButtonImageView = new ImageView("Client/Assets/commentButton.png");
+                commentButtonImageView.setPickOnBounds(true);
                 commentButtonImageView.setFitWidth(45);
                 commentButtonImageView.setFitHeight(45);
-                commentButtonImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                commentButtonImageView.setOnMouseClicked((MouseEvent event) -> {
                     String command = "ViewComments:"+p.owner.username+":"+p.id;
 
                     try {
@@ -176,7 +187,7 @@ public class homePageController implements Initializable{
                     post.getChildren().addAll(postOwnerHBox, postImageView, postButtonsHBox, likesHyperlink, postOwnerUsernameHyperLink, postDateLabel);
                 }
             }
-            likeButtonImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            likeButtonImageView.setOnMouseClicked((MouseEvent event) ->{
                 String command = "Like:"+p.owner.username+":"+p.id;
 
                 try {
@@ -207,14 +218,5 @@ public class homePageController implements Initializable{
             posts.getItems().addAll(post);
         }
 
-    }
-    public void goToShare() throws IOException, ClassNotFoundException{
-
-        //this will nullify the readUTF in sharePage
-        Client.clientOutputStream.writeUTF("Share");
-        Client.clientOutputStream.flush();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
-        ClientUI.sceneChanger(scene, "Share");
     }
 }

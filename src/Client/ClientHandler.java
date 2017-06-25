@@ -215,7 +215,7 @@ public class ClientHandler implements Runnable{
 
 
                 }
-                if(clientMessage.contains("Like"))
+                if(clientMessage.contains("Like:"))
                 {
                     //token0 Like hast, token1 profile hast, token2 post identifier hast.
                     String[] tokens = clientMessage.split(":",3);
@@ -233,26 +233,30 @@ public class ClientHandler implements Runnable{
                     Server.serialize(requestedClient);
 
                 }
-                if(clientMessage.contains("ViewLikes"))
+                if(clientMessage.contains("ViewLikes:"))
                 {
                     //token0 ViewLikes hast, token1 profile hast, token2 post identifier hast.
                     String[] tokens = clientMessage.split(":",3);
-                    Profile currentClient = profileFinder(username);
                     Profile requestedClient = profileFinder(tokens[1]);
                     Post requestedPost = postFinder(requestedClient, tokens[2]);
+                    clientOutputStream.reset();
                     clientOutputStream.writeObject(requestedPost.liked);
                     clientOutputStream.flush();
                 }
-                if(clientMessage.contains("ViewComments"))
+                if(clientMessage.contains("ViewComments:"))
                 {
                     String[] tokens = clientMessage.split(":",3);
-                    Profile currentClient = profileFinder(username);
                     Profile requestedClient = profileFinder(tokens[1]);
                     Post requestedPost = postFinder(requestedClient, tokens[2]);
+                    clientOutputStream.reset();
                     clientOutputStream.writeObject(requestedPost.comments);
                     clientOutputStream.flush();
+                    clientOutputStream.writeUTF(tokens[1]);
+                    clientOutputStream.flush();
+                    clientOutputStream.writeUTF(tokens[2]);
+                    clientOutputStream.flush();
                 }
-                if(clientMessage.contains("SendComment"))
+                if(clientMessage.contains("SendComment:"))
                 {
                     //token aval send comment , dovom username taraf, sevom id post
                     String[] tokens = clientMessage.split(":",3);
@@ -263,7 +267,6 @@ public class ClientHandler implements Runnable{
                     Comment comment = new Comment(currentClient, commentText);
                     requestedPost.comments.add(comment);
                     Server.serialize(requestedClient);
-
                 }
             }while (!clientMessage.equals("Exit"));
 
