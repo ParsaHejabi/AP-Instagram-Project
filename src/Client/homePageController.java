@@ -123,4 +123,13 @@ public class homePageController implements Initializable{
         }
 
     }
+    public void goToShare() throws IOException, ClassNotFoundException{
+
+        //this will nullify the readUTF in sharePage
+        Client.clientOutputStream.writeUTF("Share");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Share");
+    }
 }

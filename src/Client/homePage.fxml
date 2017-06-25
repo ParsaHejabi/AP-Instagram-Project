@@ -36,7 +36,7 @@
             <Image url="@Assets/offExplore.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="892.0">
+      <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToShare" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="892.0">
          <image>
             <Image url="@Assets/offShare.png" />
          </image>

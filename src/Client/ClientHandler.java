@@ -207,6 +207,20 @@ public class ClientHandler implements Runnable{
 
                     }while (!userCommand.equals("Exit"));
                 }
+                else if(clientMessage.equals("Share"))
+                {
+                    clientMessage = clientInputStream.readUTF();
+                    if (clientMessage.equals("SharePost"))
+                    {
+                        Profile curentClient = profileFinder(username);
+                        File f = ((File) clientInputStream.readObject());
+                        String caption = clientInputStream.readUTF();
+                        boolean canComment = clientInputStream.readBoolean();
+                        Server.createPost(curentClient,f, canComment, caption);
+                    }
+
+
+                }
             }while (!clientMessage.equals("Exit"));
 
             System.out.println(Thread.currentThread().getName() + " is closed!");
