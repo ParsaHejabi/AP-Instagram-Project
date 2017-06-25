@@ -12,6 +12,8 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static Client.Client.clientInputStream;
 import static Client.Client.clientOutputStream;
@@ -63,34 +65,49 @@ public class ClientUIController {
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Sign Up");
     }
+
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    public static boolean isEmailValid(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+    }
     public void signUp() throws IOException {
         String email = emailTextField.getText();
         String username = usernameTextField.getText();
         String password = passwordPasswordField.getText();
-        Client.clientOutputStream.writeUTF("Signup");
-        Client.clientOutputStream.flush();
-        Client.clientOutputStream.writeUTF(email);
-        Client.clientOutputStream.flush();
-        Client.clientOutputStream.writeUTF(username);
-        Client.clientOutputStream.flush();
-        Client.clientOutputStream.writeUTF(password);
-        Client.clientOutputStream.flush();
-        String serverResponse = clientInputStream.readUTF();
-        if (serverResponse.equals("Correct")){
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("signupPage2.fxml")));
-            scene.getStylesheets().add("Stylesheet/style.css");
-            ClientUI.sceneChanger(scene, "Sign Up");
+        if (isEmailValid(email)){
+            Client.clientOutputStream.writeUTF("Signup");
+            Client.clientOutputStream.flush();
+            Client.clientOutputStream.writeUTF(email);
+            Client.clientOutputStream.flush();
+            Client.clientOutputStream.writeUTF(username);
+            Client.clientOutputStream.flush();
+            Client.clientOutputStream.writeUTF(password);
+            Client.clientOutputStream.flush();
+            String serverResponse = clientInputStream.readUTF();
+            if (serverResponse.equals("Correct")){
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("signupPage2.fxml")));
+                scene.getStylesheets().add("Stylesheet/style.css");
+                ClientUI.sceneChanger(scene, "Sign Up");
+            }
+            else if (serverResponse.equals("Username")){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Oops!");
+                alert.setContentText("this username exists!");
+                alert.showAndWait();
+            }
+            else if (serverResponse.equals("Email")){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Oops!");
+                alert.setContentText("this email exists!");
+                alert.showAndWait();
+            }
         }
-        else if (serverResponse.equals("Username")){
+        else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Oops!");
-            alert.setContentText("this username exists!");
-            alert.showAndWait();
-        }
-        else if (serverResponse.equals("Email")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Oops!");
-            alert.setContentText("this email exists!");
+            alert.setHeaderText("Hmmm...");
+            alert.setContentText("Email is invalid!");
             alert.showAndWait();
         }
     }
