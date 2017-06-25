@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -22,7 +23,7 @@
                 <Font name="Helvetica" size="25.0" />
             </font>
         </Label>
-      <Hyperlink onAction="#goToHome" text="Share" textFill="#3897f0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="19.0">
+      <Hyperlink onAction="#share" text="Share" textFill="#3897f0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="19.0">
          <font>
             <Font name="Helvetica" size="25.0" />
          </font>
@@ -45,6 +46,12 @@
             <Font size="17.0" />
          </font>
       </TextArea>
+      <Label text="Turn Off Commenting" AnchorPane.bottomAnchor="116.0" AnchorPane.leftAnchor="70.0">
+         <font>
+            <Font name="Helvetica Bold" size="17.0" />
+         </font>
+      </Label>
+      <Pane fx:id="toggleSwitchPane" prefHeight="25.0" prefWidth="50.0" AnchorPane.bottomAnchor="114.0" AnchorPane.rightAnchor="70.0" />
         <Line endX="540.0" layoutX="270.0" layoutY="750.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="879.0" />
         <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="892.0">
             <image>
