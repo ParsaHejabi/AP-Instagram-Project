@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Client.NewsPage"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.NewsPageController">
+    <children>
+        <Label fx:id="username" text="ACTIVITY" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="25.0">
+            <font>
+                <Font name="Helvetica Bold" size="25.0" />
+            </font>
+        </Label>
+        <Line endX="540.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="879.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="80.0" />
+        <ScrollPane fx:id="newsScrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="81.0">
+         <content>
+            <VBox fx:id="newsVBox" alignment="CENTER" prefHeight="796.0" prefWidth="540.0" spacing="10.0" style="-fx-background-color: #f4f4f4;" />
+         </content></ScrollPane>
+        <Line endX="540.0" layoutX="270.0" layoutY="750.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="879.0" />
+        <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/offHome.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToSearch" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="131.0" AnchorPane.rightAnchor="464.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/offExplore.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToShare" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/offShare.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="353.0" AnchorPane.rightAnchor="131.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/onNews.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="106.0" layoutY="889.0" onMouseClicked="#goToProfile1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="464.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/offProfile.png" />
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>
