@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.NewsPageController">
+<AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.newsPageController">
     <children>
         <Label fx:id="username" text="ACTIVITY" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="25.0">
             <font>
@@ -17,9 +18,12 @@
             </font>
         </Label>
         <Line endX="540.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="879.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="80.0" />
-        <ScrollPane fx:id="newsScrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="81.0">
+        <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="82.0">
          <content>
-            <VBox fx:id="newsVBox" alignment="CENTER" prefHeight="796.0" prefWidth="540.0" spacing="10.0" style="-fx-background-color: #f4f4f4;" />
+            <VBox fx:id="newsVBox" prefHeight="794.0" prefWidth="484.0" spacing="30.0" style="-fx-background-color: #f4f4f4;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></VBox>
          </content></ScrollPane>
         <Line endX="540.0" layoutX="270.0" layoutY="750.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="879.0" />
         <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="892.0">

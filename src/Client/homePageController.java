@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -64,6 +63,16 @@ public class homePageController implements Initializable{
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Share");
+    }
+
+    public void goToNews() throws IOException, ClassNotFoundException{
+
+        //this will nullify the readUTF in sharePage
+        Client.clientOutputStream.writeUTF("#News");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Activity");
     }
 
     @Override
