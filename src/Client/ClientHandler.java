@@ -217,6 +217,8 @@ public class ClientHandler implements Runnable{
                                 }
                             }}
 
+
+
                     }while (!userCommand.equals("Exit"));
                 }
                 if(clientMessage.equals("Share"))
@@ -291,6 +293,44 @@ public class ClientHandler implements Runnable{
                     News news = new News(requestedClient, "CommentNews", requestedPost, commentText);
                     Server.createNews(currentClient, news);
                     Server.serialize(requestedClient);
+                }
+                if(clientMessage.contains("#News"))
+                {
+                    clientOutputStream.reset();
+                    clientOutputStream.writeObject(profileFinder(username).news);
+                    clientOutputStream.flush();
+                }
+                if(clientMessage.contains("#FollowUnFollow:"))
+                {
+                    String[] tokens = clientMessage.split(":",2);
+                    Profile currentClient = profileFinder(username);
+                    Profile requestedProfile = profileFinder(tokens[1]);
+                    if(currentClient.following.contains(requestedProfile))
+                    {
+                        currentClient.following.remove(requestedProfile);
+                        requestedProfile.followers.remove(currentClient);
+                        News news = new News(requestedProfile, "FollowNews", null, null);
+                        Server.deleteNews(currentClient, news);
+                        News news2 = new News(requestedProfile, "UnFollowNews", null, null);
+                        Server.createNews(currentClient, news2);
+                        Server.serialize(requestedProfile);
+                        Server.serialize(currentClient);
+                    }
+                    else {
+                        currentClient.following.add(requestedProfile);
+                        requestedProfile.followers.add(currentClient);
+                        News news = new News(requestedProfile, "UnFollowNews", null, null);
+                        Server.deleteNews(currentClient, news);
+                        News news2 = new News(requestedProfile, "FollowNews", null, null);
+                        Server.createNews(currentClient, news2);
+                        Server.serialize(requestedProfile);
+                        Server.serialize(currentClient);
+                    }
+
+                    if (clientMessage.contains("#PeoplePage:"))
+                    {
+                        String requestedUsername = clientMessage.split(":",2)[1];
+                    }
                 }
             }while (!clientMessage.equals("Exit"));
 
