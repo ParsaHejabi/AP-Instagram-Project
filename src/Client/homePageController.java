@@ -128,7 +128,15 @@ public class homePageController implements Initializable{
             postImageView.setFitHeight(500);
             HBox postButtonsHBox = new HBox(10);
             postButtonsHBox.setAlignment(Pos.CENTER_LEFT);
-            ImageView likeButtonImageView = new ImageView("Client/Assets/likeButton.png");
+            ImageView likeButtonImageView = null;
+            if (p.liked.contains(Client.profileOwner))
+            {
+                likeButtonImageView = new ImageView("Client/Assets/likeButton2.png");
+            }
+            else
+            {
+                likeButtonImageView = new ImageView("Client/Assets/likeButton1.png");
+            }
             likeButtonImageView.setPickOnBounds(true);
             likeButtonImageView.setFitWidth(45);
             likeButtonImageView.setFitHeight(45);
@@ -270,6 +278,7 @@ public class homePageController implements Initializable{
                 event.consume();
 
             });
+
             posts.getItems().addAll(post);
         }
 
