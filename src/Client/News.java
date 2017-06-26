@@ -25,6 +25,37 @@ public class News implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        News n = ((News) o);
+        if(this.owner.equals(n.owner))
+        {
+            if(this.state.equals(n.state))
+            {
+                if(this.state.equals("LikeNews"))
+                {
+                    if(this.relatedPost.equals(n.relatedPost))
+                        return true;
+                }
+                else if(this.state.equals("CommentNews"))
+                {
+                     if(this.relatedPost.equals(n.relatedPost))
+                     {
+                         if (this.commentCaption.equals(n.commentCaption))
+                             return true;
+                     }
+                }
+                else
+                    return true;
+            }
+        }
+        return false;
+
+    }
+
+    @Override
     public int hashCode() {
         int hash = owner.hashCode() * 31;
         hash = hash * 31 + state.hashCode();
@@ -32,4 +63,6 @@ public class News implements Serializable {
         hash = hash * 31 + (commentCaption != null ? commentCaption.hashCode() : 0);
         return hash;
     }
+
+
 }

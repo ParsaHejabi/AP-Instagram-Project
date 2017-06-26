@@ -20,6 +20,20 @@ public class Post implements Comparable,Serializable {
     String id;
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Post post = (Post) o;
+
+        if (!owner.equals(post.owner)) return false;
+        if (!uploadDate.equals(post.uploadDate)) return false;
+        return id.equals(post.id);
+
+
+    }
+
+    @Override
     public int hashCode() {
         return image.getAbsolutePath().hashCode() + (owner.hashCode() * 31);
     }

@@ -42,7 +42,7 @@ public class Profile implements Serializable{
         if (o == null || getClass() != o.getClass()) return false;
 
         Profile profile = (Profile) o;
-        if (this.username.equals(profile.username)) return true;
+        if (this.email.equals(profile.email)) return true;
         return false;
     }
 
