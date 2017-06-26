@@ -79,6 +79,15 @@ public class profilePage1Controller implements Initializable{
         ClientUI.sceneChanger(scene, "Search");
     }
 
+    public void goToNews() throws IOException, ClassNotFoundException{
+
+        Client.clientOutputStream.writeUTF("#News");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Activity");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {

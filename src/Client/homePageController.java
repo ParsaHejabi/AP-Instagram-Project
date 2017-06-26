@@ -67,12 +67,23 @@ public class homePageController implements Initializable{
 
     public void goToNews() throws IOException, ClassNotFoundException{
 
-        //this will nullify the readUTF in sharePage
         Client.clientOutputStream.writeUTF("#News");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Activity");
+    }
+
+    private void goToPeople(Post p) {
+        try {
+            Client.clientOutputStream.writeUTF("#PeoplePage:"+p.owner.username);
+            Client.clientOutputStream.flush();
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));
+            scene.getStylesheets().add("Stylesheet/style.css");
+            ClientUI.sceneChanger(scene, "People");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -94,6 +105,9 @@ public class homePageController implements Initializable{
             postOwnerHBox.setAlignment(Pos.CENTER_LEFT);
             Circle postOwnerProfilePicture = new Circle(20,new ImagePattern(new Image(p.owner.profilePicture.toURI().toString())));
             Hyperlink postOwnerUsername = new Hyperlink(p.owner.username);
+            postOwnerUsername.setOnAction(event -> {
+                goToPeople(p);
+            });
             postOwnerUsername.setStyle(("-fx-font-family: Helvetica;" +
                     "-fx-font-size: 17;" +
                     "-fx-font-weight: bold;" +

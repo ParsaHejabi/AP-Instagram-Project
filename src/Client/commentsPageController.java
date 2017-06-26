@@ -117,4 +117,6 @@ public class commentsPageController implements Initializable {
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Home");
     }
+
+
 }

@@ -68,7 +68,7 @@
                 <Image url="@Assets/onShare.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="353.0" AnchorPane.rightAnchor="131.0" AnchorPane.topAnchor="892.0">
+        <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToNews" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="353.0" AnchorPane.rightAnchor="131.0" AnchorPane.topAnchor="892.0">
             <image>
                 <Image url="@Assets/offNews.png" />
             </image>

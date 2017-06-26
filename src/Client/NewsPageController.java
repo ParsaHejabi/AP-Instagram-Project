@@ -28,8 +28,6 @@ import java.util.ResourceBundle;
  */
 public class newsPageController implements Initializable {
     @FXML
-    ScrollPane newsScrollPane;
-    @FXML
     VBox newsVBox;
 
 
@@ -70,12 +68,23 @@ public class newsPageController implements Initializable {
 
     public void goToNews() throws IOException, ClassNotFoundException{
 
-        //this will nullify the readUTF in sharePage
         Client.clientOutputStream.writeUTF("#News");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Activity");
+    }
+
+    private void goToPeople(News n) {
+        try {
+            Client.clientOutputStream.writeUTF("#PeoplePage:"+n.owner.username);
+            Client.clientOutputStream.flush();
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));
+            scene.getStylesheets().add("Stylesheet/style.css");
+            ClientUI.sceneChanger(scene, "People");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -105,6 +114,9 @@ public class newsPageController implements Initializable {
                     "-fx-font-size: 17;" +
                     "-fx-font-weight: bold;" +
                     "-fx-text-fill: black");
+            newsOwnerUsername.setOnAction(event -> {
+                goToPeople(n);
+            });
             newsOwnerUsername.setPadding(new Insets(0));
             Label newsDateLabel = new Label(n.newsDate.toString());
             newsDateLabel.setTextFill(Color.web("#c7c7c7"));
@@ -122,6 +134,19 @@ public class newsPageController implements Initializable {
                     followUnfollowButton.setStyle("-fx-background-color:#f4f4f4;" +
                             "-fx-text-fill:black;" +
                             "-fx-border-color:black;");
+                    followUnfollowButton.setOnAction(event -> {
+                        try {
+                            Client.clientOutputStream.writeUTF("#FollowUnFollow:"+n.owner.username);
+                            Client.clientOutputStream.flush();
+                            Client.refreshOwner();
+                            goToNews();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    });
                     newsDetailHBox.getChildren().addAll(newsOwnerUsername);
                     newsDetailVBox.getChildren().addAll(newsDetailHBox, newsLabel,newsDateLabel);
                     newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("          "),followUnfollowButton);
@@ -131,6 +156,20 @@ public class newsPageController implements Initializable {
                     followUnfollowButton.setStyle("-fx-background-color:#3897f0;" +
                             "-fx-text-fill:white;" +
                             "-fx-border-color:#3897f0");
+                    followUnfollowButton.setOnAction(event -> {
+                        try {
+                            Client.clientOutputStream.writeUTF("#FollowUnFollow:"+n.owner.username);
+                            Client.clientOutputStream.flush();
+                            Client.refreshOwner();
+                            goToNews();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    });
                     newsDetailHBox.getChildren().addAll(newsOwnerUsername);
                     newsDetailVBox.getChildren().addAll(newsDetailHBox, newsLabel,newsDateLabel);
                     newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("               "),followUnfollowButton);
@@ -147,6 +186,20 @@ public class newsPageController implements Initializable {
                     followUnfollowButton.setStyle("-fx-background-color:#f4f4f4;" +
                             "-fx-text-fill:black;" +
                             "-fx-border-color:black;");
+                    followUnfollowButton.setOnAction(event -> {
+                        try {
+                            Client.clientOutputStream.writeUTF("#FollowUnFollow:"+n.owner.username);
+                            Client.clientOutputStream.flush();
+                            Client.refreshOwner();
+                            goToNews();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    });
                     newsDetailHBox.getChildren().addAll(newsOwnerUsername);
                     newsDetailVBox.getChildren().addAll(newsDetailHBox, newsLabel,newsDateLabel);
                     newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("          "),followUnfollowButton);
@@ -156,6 +209,19 @@ public class newsPageController implements Initializable {
                     followUnfollowButton.setStyle("-fx-background-color:#3897f0;" +
                             "-fx-text-fill:white;" +
                             "-fx-border-color:#3897f0");
+                    followUnfollowButton.setOnAction(event -> {
+                        try {
+                            Client.clientOutputStream.writeUTF("#FollowUnFollow:"+n.owner.username);
+                            Client.clientOutputStream.flush();
+                            Client.refreshOwner();
+                            goToNews();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    });
                     newsDetailHBox.getChildren().addAll(newsOwnerUsername);
                     newsDetailVBox.getChildren().addAll(newsDetailHBox, newsLabel,newsDateLabel);
                     newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("               "),followUnfollowButton);

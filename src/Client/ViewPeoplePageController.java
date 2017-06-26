@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
  * Created by parsahejabi on 6/23/17.
  */
 public class ViewPeoplePageController implements Initializable {
+    String previousState;
     static Profile requestedProfile;
     @FXML
     private Circle profilePicture;
@@ -39,6 +40,8 @@ public class ViewPeoplePageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             Client.refreshOwner();
+            previousState = Client.clientInputStream.readUTF();
+            System.out.println(previousState);
             requestedProfile = ((Profile) Client.clientInputStream.readObject());
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,5 +127,22 @@ public class ViewPeoplePageController implements Initializable {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Share");
+    }
+
+    public void goToNews() throws IOException, ClassNotFoundException{
+        Client.clientOutputStream.writeUTF("#News");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Activity");
+    }
+
+    public void goBack() throws IOException, ClassNotFoundException {
+        if (previousState.equals("Home")){
+            goToHome();
+        }
+        else if (previousState.equals("#News")){
+            goToNews();
+        }
     }
 }

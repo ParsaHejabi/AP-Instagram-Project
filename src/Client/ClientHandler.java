@@ -120,6 +120,7 @@ public class ClientHandler implements Runnable{
                 }
 
             }while (!clientMessage.equals("Exit"));
+            String previousState = null;
             do {
                 clientMessage = clientInputStream.readUTF();
                 System.out.println(clientMessage);
@@ -148,6 +149,7 @@ public class ClientHandler implements Runnable{
                 }
                 if (clientMessage.equals("Home"))
                 {
+                    previousState = clientMessage;
                     Profile currentClient = profileFinder(username);
                     ArrayList<Post> postsToShow = new ArrayList<>();
                     for (Profile profile: currentClient.following){
@@ -298,6 +300,7 @@ public class ClientHandler implements Runnable{
                 }
                 if(clientMessage.contains("#News"))
                 {
+                    previousState = clientMessage;
                     clientOutputStream.reset();
                     clientOutputStream.writeObject(profileFinder(username).news);
                     clientOutputStream.flush();
@@ -332,6 +335,9 @@ public class ClientHandler implements Runnable{
                 }
                 if (clientMessage.contains("#PeoplePage:"))
                 {
+                    clientOutputStream.reset();
+                    clientOutputStream.writeUTF(previousState);
+                    clientOutputStream.flush();
                     String requestedUsername = clientMessage.split(":",2)[1];
                     Profile requestedProfile = profileFinder(requestedUsername);
 
