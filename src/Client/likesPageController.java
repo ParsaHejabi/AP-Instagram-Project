@@ -56,6 +56,9 @@ public class likesPageController implements Initializable {
                     "-fx-font-weight: bold;" +
                     "-fx-text-fill: black;" +
                     "-fx-text-decoration: none;");
+            likedByUsername.setOnAction(event -> {
+                goToPeople(p);
+            });
             Label likedByFullname = new Label(p.fullName);
             likedByFullname.setTextFill(Color.web("#c7c7c7"));
             likedByFullname.setStyle("-fx-font-family: Helvetica;" +
@@ -104,5 +107,24 @@ public class likesPageController implements Initializable {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
         scene.getStylesheets().add("Stylesheet/style.css");
         ClientUI.sceneChanger(scene, "Activity");
+    }
+
+    private void goToPeople(Profile p) {
+        try {
+            if (p.username.equals(Client.profileOwner.username)){
+                goToProfile1();
+            }
+            else{
+                Client.clientOutputStream.writeUTF("#PeoplePage:"+p.username);
+                Client.clientOutputStream.flush();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));
+                scene.getStylesheets().add("Stylesheet/style.css");
+                ClientUI.sceneChanger(scene, "People");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

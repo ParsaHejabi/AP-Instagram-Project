@@ -113,7 +113,6 @@ public class ViewPeoplePageController implements Initializable {
     }
 
     private void goToPeople() throws IOException, ClassNotFoundException {
-
         Client.clientOutputStream.writeUTF("#PeoplePage:"+requestedProfile.username);
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));

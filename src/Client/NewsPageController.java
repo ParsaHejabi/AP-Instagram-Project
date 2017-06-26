@@ -77,12 +77,19 @@ public class newsPageController implements Initializable {
 
     private void goToPeople(News n) {
         try {
-            Client.clientOutputStream.writeUTF("#PeoplePage:"+n.owner.username);
-            Client.clientOutputStream.flush();
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));
-            scene.getStylesheets().add("Stylesheet/style.css");
-            ClientUI.sceneChanger(scene, "People");
+            if (n.owner.username.equals(Client.profileOwner.username)){
+                goToProfile1();
+            }
+            else{
+                Client.clientOutputStream.writeUTF("#PeoplePage:"+n.owner.username);
+                Client.clientOutputStream.flush();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));
+                scene.getStylesheets().add("Stylesheet/style.css");
+                ClientUI.sceneChanger(scene, "People");
+            }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

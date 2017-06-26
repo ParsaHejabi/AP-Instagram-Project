@@ -61,6 +61,10 @@ public class commentsPageController implements Initializable {
             VBox commentDetailVBox = new VBox(10);
             Circle commentOwnerProfilePicture = new Circle(35,new ImagePattern(new Image(postComments.get(i).owner.profilePicture.toURI().toString())));
             Hyperlink commentOwnerUsername = new Hyperlink(postComments.get(i).owner.username);
+            Comment c = postComments.get(i);
+            commentOwnerUsername.setOnAction(event -> {
+                goToPeople(c.owner);
+            });
             commentOwnerUsername.setStyle("-fx-font-family: Helvetica;" +
                     "-fx-font-size: 17;" +
                     "-fx-font-weight: bold;" +
@@ -118,5 +122,30 @@ public class commentsPageController implements Initializable {
         ClientUI.sceneChanger(scene, "Home");
     }
 
+    public void goToProfile1() throws IOException, ClassNotFoundException {
+        Client.clientOutputStream.writeUTF("Profile1");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
+        scene.getStylesheets().add("Stylesheet/style.css");
+        ClientUI.sceneChanger(scene, "Profile");
+    }
 
+    private void goToPeople(Profile p) {
+        try {
+            if (p.username.equals(Client.profileOwner.username)){
+                goToProfile1();
+            }
+            else{
+                Client.clientOutputStream.writeUTF("#PeoplePage:"+p.username);
+                Client.clientOutputStream.flush();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));
+                scene.getStylesheets().add("Stylesheet/style.css");
+                ClientUI.sceneChanger(scene, "People");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
