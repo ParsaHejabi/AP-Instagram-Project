@@ -94,6 +94,11 @@ public class homePageController implements Initializable{
             postOwnerHBox.setAlignment(Pos.CENTER_LEFT);
             Circle postOwnerProfilePicture = new Circle(20,new ImagePattern(new Image(p.owner.profilePicture.toURI().toString())));
             Hyperlink postOwnerUsername = new Hyperlink(p.owner.username);
+            postOwnerUsername.setStyle(("-fx-font-family: Helvetica;" +
+                    "-fx-font-size: 17;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-text-fill: black;" +
+                    "-fx-text-decoration: none;"));
             postOwnerUsername.setPadding(new Insets(0));
             postOwnerHBox.getChildren().addAll(postOwnerProfilePicture,postOwnerUsername);
             ImageView postImageView = new ImageView(new Image(p.image.toURI().toString()));
@@ -133,6 +138,11 @@ public class homePageController implements Initializable{
                 postButtonsHBox.getChildren().add(likeButtonImageView);
             }
             Hyperlink likesHyperlink = new Hyperlink(p.liked.size() + " likes");
+            likesHyperlink.setStyle(("-fx-font-family: Helvetica;" +
+                    "-fx-font-size: 17;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-text-fill: black;" +
+                    "-fx-text-decoration: none;"));
             likesHyperlink.setOnAction(event -> {
                 String command = "ViewLikes:"+p.owner.username+":"+p.id;
 
@@ -148,6 +158,11 @@ public class homePageController implements Initializable{
             });
             likesHyperlink.setPadding(new Insets(0));
             Hyperlink postOwnerUsernameHyperLink = new Hyperlink(p.owner.username);
+            postOwnerUsernameHyperLink.setStyle(("-fx-font-family: Helvetica;" +
+                    "-fx-font-size: 17;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-text-fill: black;" +
+                    "-fx-text-decoration: none;"));
             postOwnerUsernameHyperLink.setPadding(new Insets(0));
             Label postCaptionTextArea = new Label(p.caption);
             //TODO age khastim ye kari konim ke date alano begire menhaye oon moghe kone
@@ -155,6 +170,11 @@ public class homePageController implements Initializable{
             if (!postCaptionTextArea.getText().isEmpty()){
                 if (p.canComment){
                     Hyperlink commentHyperlink = new Hyperlink("View all " + p.comments.size() + " comments");
+                    commentHyperlink.setStyle(("-fx-font-family: Helvetica;" +
+                            "-fx-font-size: 17;" +
+                            "-fx-font-weight: bold;" +
+                            "-fx-text-fill: black;" +
+                            "-fx-text-decoration: none;"));
                     commentHyperlink.setOnAction(event -> {
                         String command = "ViewComments:"+p.owner.username+":"+p.id;
 
@@ -177,6 +197,11 @@ public class homePageController implements Initializable{
             else{
                 if (p.canComment){
                     Hyperlink commentHyperlink = new Hyperlink("View all " + p.comments.size() + " comments");
+                    commentHyperlink.setStyle(("-fx-font-family: Helvetica;" +
+                            "-fx-font-size: 17;" +
+                            "-fx-font-weight: bold;" +
+                            "-fx-text-fill: black;" +
+                            "-fx-text-decoration: none;"));
                     commentHyperlink.setOnAction(event -> {
                         String command = "ViewComments:"+p.owner.username+":"+p.id;
 

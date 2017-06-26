@@ -52,9 +52,9 @@ public class commentsPageController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        commentsListView.setPadding(new Insets(0));
         int size = postComments.size();
         for (int i=size - 1; i>=0; i--){
-            commentsListView.setPadding(new Insets(0));
             HBox comments = new HBox(10);
             comments.setPadding(new Insets(0));
             comments.setAlignment(Pos.CENTER_LEFT);
@@ -64,7 +64,8 @@ public class commentsPageController implements Initializable {
             commentOwnerUsername.setStyle("-fx-font-family: Helvetica;" +
                     "-fx-font-size: 17;" +
                     "-fx-font-weight: bold;" +
-                    "-fx-color:black");
+                    "-fx-text-fill: black;" +
+                    "-fx-text-decoration: none;");
             commentOwnerUsername.setPadding(new Insets(0));
             Label commentLabel = new Label(postComments.get(i).commentText);
             commentLabel.setWrapText(true);

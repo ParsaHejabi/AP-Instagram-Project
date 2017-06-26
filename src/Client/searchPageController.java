@@ -72,7 +72,8 @@ public class searchPageController implements Initializable{
             usernameHyperLink.setStyle("-fx-font-family: Helvetica;" +
                     "-fx-font-size: 20;" +
                     "-fx-font-weight: bold;" +
-                    "-fx-color:black");
+                    "-fx-text-fill: black;" +
+                    "-fx-text-decoration: none;");
             usernameHyperLink.setAlignment(Pos.CENTER_LEFT);
             usernameHyperLink.setOnAction(event -> {
                 try {

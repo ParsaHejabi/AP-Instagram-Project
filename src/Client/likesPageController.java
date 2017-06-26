@@ -54,7 +54,8 @@ public class likesPageController implements Initializable {
             likedByUsername.setStyle("-fx-font-family: Helvetica;" +
                     "-fx-font-size: 17;" +
                     "-fx-font-weight: bold;" +
-                    "-fx-color:black");
+                    "-fx-text-fill: black;" +
+                    "-fx-text-decoration: none;");
             Label likedByFullname = new Label(p.fullName);
             likedByFullname.setTextFill(Color.web("#c7c7c7"));
             likedByFullname.setStyle("-fx-font-family: Helvetica;" +

@@ -122,16 +122,19 @@ public class newsPageController implements Initializable {
                     followUnfollowButton.setStyle("-fx-background-color:#f4f4f4;" +
                             "-fx-text-fill:black;" +
                             "-fx-border-color:black;");
+                    newsDetailHBox.getChildren().addAll(newsOwnerUsername);
+                    newsDetailVBox.getChildren().addAll(newsDetailHBox, newsLabel,newsDateLabel);
+                    newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("          "),followUnfollowButton);
                 }
                 else {
                     followUnfollowButton.setText("Follow");
                     followUnfollowButton.setStyle("-fx-background-color:#3897f0;" +
                             "-fx-text-fill:white;" +
                             "-fx-border-color:#3897f0");
+                    newsDetailHBox.getChildren().addAll(newsOwnerUsername);
+                    newsDetailVBox.getChildren().addAll(newsDetailHBox, newsLabel,newsDateLabel);
+                    newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("               "),followUnfollowButton);
                 }
-                newsDetailHBox.getChildren().addAll(newsOwnerUsername, newsLabel);
-                newsDetailVBox.getChildren().addAll(newsDetailHBox, newsDateLabel);
-                newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("           "),followUnfollowButton);
             }
             else if (n.state.equals("UnFollowNews")){
                 Label newsLabel = new Label("unfollowed you.");
@@ -144,16 +147,19 @@ public class newsPageController implements Initializable {
                     followUnfollowButton.setStyle("-fx-background-color:#f4f4f4;" +
                             "-fx-text-fill:black;" +
                             "-fx-border-color:black;");
+                    newsDetailHBox.getChildren().addAll(newsOwnerUsername);
+                    newsDetailVBox.getChildren().addAll(newsDetailHBox, newsLabel,newsDateLabel);
+                    newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("          "),followUnfollowButton);
                 }
                 else {
                     followUnfollowButton.setText("Follow");
                     followUnfollowButton.setStyle("-fx-background-color:#3897f0;" +
                             "-fx-text-fill:white;" +
                             "-fx-border-color:#3897f0");
+                    newsDetailHBox.getChildren().addAll(newsOwnerUsername);
+                    newsDetailVBox.getChildren().addAll(newsDetailHBox, newsLabel,newsDateLabel);
+                    newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("               "),followUnfollowButton);
                 }
-                newsDetailHBox.getChildren().addAll(newsOwnerUsername, newsLabel);
-                newsDetailVBox.getChildren().addAll(newsDetailHBox, newsDateLabel);
-                newsHBox.getChildren().addAll(newsOwnerProfilePicture, newsDetailVBox, new Label("           "),followUnfollowButton);
             }
             else if (n.state.equals("LikeNews")){
                 Label newsLabel = new Label("liked your post.");
