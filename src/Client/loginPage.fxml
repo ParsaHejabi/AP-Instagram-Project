@@ -34,12 +34,12 @@
             </font>
         </Button>
         <Line endX="540.0" layoutX="270.0" layoutY="750.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" />
-        <Label layoutX="148.0" layoutY="921.0" text="Don't have an account?" textFill="#999999" AnchorPane.bottomAnchor="20.0">
+        <Label layoutX="151.0" layoutY="921.0" text="Don't have an account?" textFill="#999999" AnchorPane.bottomAnchor="20.0">
             <font>
                 <Font name="Helvetica" size="15.0" />
             </font>
         </Label>
-        <Hyperlink accessibleRoleDescription="?" layoutX="318.0" layoutY="917.0" onAction="#goToSignUpPage" text="Sign Up." textFill="#999999" AnchorPane.bottomAnchor="16.0">
+        <Hyperlink accessibleRoleDescription="?" layoutX="305.0" layoutY="917.0" onAction="#goToSignUpPage" text="Sign Up." textFill="#999999" AnchorPane.bottomAnchor="16.0">
             <font>
                 <Font name="Helvetica Bold" size="15.0" />
             </font>
