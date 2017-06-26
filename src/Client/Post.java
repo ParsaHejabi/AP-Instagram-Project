@@ -20,6 +20,11 @@ public class Post implements Comparable,Serializable {
     String id;
 
     @Override
+    public int hashCode() {
+        return image.getAbsolutePath().hashCode() + (owner.hashCode() * 31);
+    }
+
+    @Override
     public int compareTo(Object o) {
         return ((Post) o).uploadDate.compareTo(this.uploadDate);
     }

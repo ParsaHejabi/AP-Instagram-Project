@@ -17,9 +17,11 @@ public class Profile implements Serializable{
     String biography;
     File profilePicture;
 
+
     ArrayList<Profile> following;
     ArrayList<Profile> followers;
     ArrayList<Post> posts;
+    ArrayList<News> news;
 
     public Profile(String email, String password, String username, String fullName, String biography, File profilePicture) {
         this.email = email;
@@ -31,6 +33,7 @@ public class Profile implements Serializable{
         following = new ArrayList<>();
         followers = new ArrayList<>();
         posts = new ArrayList<>();
+        news = new ArrayList<>();
     }
 
     @Override

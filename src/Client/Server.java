@@ -122,4 +122,21 @@ public class Server {
             e.printStackTrace();
         }
     }
+
+    static void createNews(Profile owner, News news){
+        owner.news.add(news);
+        try {
+            serialize(owner);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    static void deleteNews(Profile owner, News news){
+        owner.news.remove(news);
+        try {
+            serialize(owner);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

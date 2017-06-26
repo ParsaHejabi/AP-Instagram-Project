@@ -198,12 +198,20 @@ public class ClientHandler implements Runnable{
                                 {
                                     currentClient.following.remove(requestedProfile);
                                     requestedProfile.followers.remove(currentClient);
+                                    News news = new News(requestedProfile, "FollowNews", null, null);
+                                    Server.deleteNews(currentClient, news);
+                                    News news2 = new News(requestedProfile, "UnFollowNews", null, null);
+                                    Server.createNews(currentClient, news2);
                                     Server.serialize(requestedProfile);
                                     Server.serialize(currentClient);
                                 }
                                 else {
                                     currentClient.following.add(requestedProfile);
                                     requestedProfile.followers.add(currentClient);
+                                    News news = new News(requestedProfile, "UnFollowNews", null, null);
+                                    Server.deleteNews(currentClient, news);
+                                    News news2 = new News(requestedProfile, "FollowNews", null, null);
+                                    Server.createNews(currentClient, news2);
                                     Server.serialize(requestedProfile);
                                     Server.serialize(currentClient);
                                 }
@@ -234,10 +242,14 @@ public class ClientHandler implements Runnable{
                     Post requestedPost = postFinder(requestedClient, tokens[2]);
                     if(requestedPost.liked.contains(currentClient))
                     {
+                        News news = new News(requestedClient, "LikeNews", requestedPost, null);
+                        Server.deleteNews(currentClient, news);
                         requestedPost.liked.remove(currentClient);
                     }
                     else
                     {
+                        News news = new News(requestedClient, "LikeNews", requestedPost, null);
+                        Server.createNews(currentClient, news);
                         requestedPost.liked.add(currentClient);
                     }
                     Server.serialize(requestedClient);
@@ -276,6 +288,8 @@ public class ClientHandler implements Runnable{
                     Post requestedPost = postFinder(requestedClient, tokens[2]);
                     Comment comment = new Comment(currentClient, commentText);
                     requestedPost.comments.add(comment);
+                    News news = new News(requestedClient, "CommentNews", requestedPost, commentText);
+                    Server.createNews(currentClient, news);
                     Server.serialize(requestedClient);
                 }
             }while (!clientMessage.equals("Exit"));
