@@ -346,6 +346,47 @@ public class ClientHandler implements Runnable{
                     clientOutputStream.flush();
 
                 }
+                if( clientMessage.contains("#EditPage"))
+                {
+                    String clientCommand = clientInputStream.readUTF();
+                    if (clientCommand.equals("#DoEdit"))
+                    {
+                        Profile profile = profileFinder(username);
+                        clientCommand = clientInputStream.readUTF();
+                        if (clientCommand.equals("#Yes"))
+                        {
+                            byte[] picBytes = ((byte[]) clientInputStream.readObject());
+                            Files.write(profile.profilePicture.toPath(),picBytes );
+                        }else
+                        {
+
+                        }
+                        clientCommand = clientInputStream.readUTF();
+                        if (clientCommand.equals("#Yes"))
+                        {
+                            profile.fullName = clientInputStream.readUTF();
+                        }else
+                        {
+
+                        }
+                        clientCommand = clientInputStream.readUTF();
+                        if (clientCommand.equals("#Yes"))
+                        {
+                            profile.biography = clientInputStream.readUTF();
+                        }else
+                        {
+
+                        }
+                        clientCommand = clientInputStream.readUTF();
+                        if (clientCommand.equals("#Yes"))
+                        {
+                            profile.password = clientInputStream.readUTF();
+                        }else
+                        {
+
+                        }
+                    }
+                }
             }while (!clientMessage.equals("Exit"));
 
             System.out.println(Thread.currentThread().getName() + " is closed!");
