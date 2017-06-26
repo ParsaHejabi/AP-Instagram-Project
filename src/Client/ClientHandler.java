@@ -126,16 +126,26 @@ public class ClientHandler implements Runnable{
                 refreshClientOwner(profileFinder(username));
                 if (clientMessage.equals("Profile1"))
                 {
-                }
-                if ( clientMessage.equals("Profile2"))
-                 {Profile currentClient = profileFinder(username);
+                    Profile currentClient = profileFinder(username);
                     ArrayList<Post> postsToShow = new ArrayList<>();
                     for (Post post: currentClient.posts){
                         postsToShow.add(post);
                     }
                     clientOutputStream.reset();
                     clientOutputStream.writeObject(postsToShow);
-                    clientOutputStream.flush();}
+                    clientOutputStream.flush();
+                }
+                if ( clientMessage.equals("Profile2"))
+                {
+                    Profile currentClient = profileFinder(username);
+                    ArrayList<Post> postsToShow = new ArrayList<>();
+                    for (Post post: currentClient.posts){
+                        postsToShow.add(post);
+                    }
+                    clientOutputStream.reset();
+                    clientOutputStream.writeObject(postsToShow);
+                    clientOutputStream.flush();
+                }
                 if (clientMessage.equals("Home"))
                 {
                     Profile currentClient = profileFinder(username);

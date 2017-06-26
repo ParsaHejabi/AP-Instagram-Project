@@ -52,25 +52,25 @@ public class commentsPageController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        for (Comment c:postComments){
+        int size = postComments.size();
+        for (int i=size - 1; i>=0; i--){
             commentsListView.setPadding(new Insets(0));
             HBox comments = new HBox(10);
             comments.setPadding(new Insets(0));
             comments.setAlignment(Pos.CENTER_LEFT);
             VBox commentDetailVBox = new VBox(10);
-            Circle commentOwnerProfilePicture = new Circle(35,new ImagePattern(new Image(c.owner.profilePicture.toURI().toString())));
-            Hyperlink commentOwnerUsername = new Hyperlink(c.owner.username);
+            Circle commentOwnerProfilePicture = new Circle(35,new ImagePattern(new Image(postComments.get(i).owner.profilePicture.toURI().toString())));
+            Hyperlink commentOwnerUsername = new Hyperlink(postComments.get(i).owner.username);
             commentOwnerUsername.setStyle("-fx-font-family: Helvetica;" +
                     "-fx-font-size: 17;" +
                     "-fx-font-weight: bold;" +
                     "-fx-color:black");
             commentOwnerUsername.setPadding(new Insets(0));
-            Label commentLabel = new Label(c.commentText);
+            Label commentLabel = new Label(postComments.get(i).commentText);
             commentLabel.setWrapText(true);
             commentLabel.setStyle("-fx-font-family: Helvetica;" +
                     "-fx-font-size: 17;");
-            Label commentDateLabel = new Label(c.uploadDate.toString());
+            Label commentDateLabel = new Label(postComments.get(i).uploadDate.toString());
             commentDateLabel.setTextFill(Color.web("#c7c7c7"));
             commentDateLabel.setStyle("-fx-font-family: Helvetica;" +
                     "-fx-font-size: 15;");
