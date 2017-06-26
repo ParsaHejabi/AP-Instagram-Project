@@ -36,14 +36,14 @@ public class homePageController implements Initializable{
         Client.clientOutputStream.writeUTF("Profile1");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Profile");
     }
     public void goToHome() throws IOException, ClassNotFoundException {
         Client.clientOutputStream.writeUTF("Home");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Home");
     }
 
@@ -51,7 +51,7 @@ public class homePageController implements Initializable{
         Client.clientOutputStream.writeUTF("Search");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("searchPage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Search");
     }
 
@@ -61,7 +61,7 @@ public class homePageController implements Initializable{
         Client.clientOutputStream.writeUTF("Share");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Share");
     }
 
@@ -70,7 +70,7 @@ public class homePageController implements Initializable{
         Client.clientOutputStream.writeUTF("#News");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Activity");
     }
 
@@ -83,7 +83,7 @@ public class homePageController implements Initializable{
                 Client.clientOutputStream.writeUTF("#PeoplePage:"+p.owner.username);
                 Client.clientOutputStream.flush();
                 Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));
-                scene.getStylesheets().add("Stylesheet/style.css");
+                scene.getStylesheets().add("Client/style.css");
                 ClientUI.sceneChanger(scene, "People");
             }
         } catch (IOException e) {
@@ -110,7 +110,7 @@ public class homePageController implements Initializable{
             post.setPadding(new Insets(0));
             HBox postOwnerHBox = new HBox(10);
             postOwnerHBox.setAlignment(Pos.CENTER_LEFT);
-            Circle postOwnerProfilePicture = new Circle(20,new ImagePattern(new Image(p.owner.profilePicture.toURI().toString())));
+            Circle postOwnerProfilePicture = new Circle(30,new ImagePattern(new Image(p.owner.profilePicture.toURI().toString())));
             Hyperlink postOwnerUsername = new Hyperlink(p.owner.username);
             postOwnerUsername.setOnAction(event -> {
                 goToPeople(p);
@@ -152,7 +152,7 @@ public class homePageController implements Initializable{
                         Client.clientOutputStream.writeUTF(command);
                         Client.clientOutputStream.flush();
                         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
-                        scene.getStylesheets().add("Stylesheet/style.css");
+                        scene.getStylesheets().add("Client/style.css");
                         ClientUI.sceneChanger(scene, "Comments");
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -179,7 +179,7 @@ public class homePageController implements Initializable{
                     Client.clientOutputStream.writeUTF(command);
                     Client.clientOutputStream.flush();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("likesPage.fxml")));
-                    scene.getStylesheets().add("Stylesheet/style.css");
+                    scene.getStylesheets().add("Client/style.css");
                     ClientUI.sceneChanger(scene, "Likes");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -211,7 +211,7 @@ public class homePageController implements Initializable{
                             Client.clientOutputStream.writeUTF(command);
                             Client.clientOutputStream.flush();
                             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
-                            scene.getStylesheets().add("Stylesheet/style.css");
+                            scene.getStylesheets().add("Client/style.css");
                             ClientUI.sceneChanger(scene, "Comments");
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -238,7 +238,7 @@ public class homePageController implements Initializable{
                             Client.clientOutputStream.writeUTF(command);
                             Client.clientOutputStream.flush();
                             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
-                            scene.getStylesheets().add("Stylesheet/style.css");
+                            scene.getStylesheets().add("Client/style.css");
                             ClientUI.sceneChanger(scene, "Comments");
                         } catch (IOException e) {
                             e.printStackTrace();

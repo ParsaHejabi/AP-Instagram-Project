@@ -87,7 +87,7 @@ public class peoplePageController implements Initializable {
         Client.clientOutputStream.writeUTF("Profile1");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Profile");
     }
     public void goToHome() throws IOException, ClassNotFoundException {
@@ -95,7 +95,7 @@ public class peoplePageController implements Initializable {
         Client.clientOutputStream.writeUTF("Home");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Home");
     }
 
@@ -104,7 +104,7 @@ public class peoplePageController implements Initializable {
         Client.clientOutputStream.writeUTF("Search");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("searchPage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Search");
     }
 
@@ -113,7 +113,7 @@ public class peoplePageController implements Initializable {
         Client.clientOutputStream.writeUTF("People:" + p.username);
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("peoplePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "People");
     }
 
@@ -122,7 +122,7 @@ public class peoplePageController implements Initializable {
         Client.clientOutputStream.writeUTF("Share");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Share");
     }
 
@@ -131,7 +131,7 @@ public class peoplePageController implements Initializable {
         Client.clientOutputStream.writeUTF("#News");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Activity");
     }
 }

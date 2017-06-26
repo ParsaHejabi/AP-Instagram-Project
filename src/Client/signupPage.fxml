@@ -13,27 +13,32 @@
 
 <AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.ClientUIController">
     <children>
-        <ImageView fitHeight="332.0" fitWidth="340.0" layoutX="105.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="103.0">
+        <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="105.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="140.0">
             <image>
-                <Image url="@Assets/user.png" />
+                <Image url="@Assets/1498528295_user_male2.png" />
             </image>
         </ImageView>
-      <TextField fx:id="emailTextField" layoutX="20.0" layoutY="505.0" prefHeight="50.0" promptText="Email" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <Label alignment="CENTER" layoutX="254.0" layoutY="459.0" text="ENTER EMAIL, USERNAME AND PASSWORD" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="410.0">
+         <font>
+            <Font name="Helvetica Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailTextField" layoutX="20.0" layoutY="505.0" prefHeight="50.0" promptText="Email" style="-fx-background-color: #f4f4f4; -fx-border-color: #c7c7c7;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="470.0">
          <font>
             <Font name="Helvetica" size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="usernameTextField" layoutX="20.0" layoutY="562.0" prefHeight="50.0" promptText="Username" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <TextField fx:id="usernameTextField" layoutX="20.0" layoutY="562.0" prefHeight="50.0" promptText="Username" style="-fx-background-color: #f4f4f4; -fx-border-color: #c7c7c7;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="540.0">
          <font>
             <Font name="Helvetica" size="15.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="passwordPasswordField" layoutX="20.0" layoutY="618.0" prefHeight="50.0" promptText="Password" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <PasswordField fx:id="passwordPasswordField" layoutX="20.0" layoutY="618.0" prefHeight="50.0" promptText="Password" style="-fx-background-color: #f4f4f4; -fx-border-color: #c7c7c7;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="610.0">
          <font>
             <Font name="Helvetica" size="15.0" />
          </font>
       </PasswordField>
-        <Button fx:id="signUpButton" layoutX="20.0" layoutY="691.0" mnemonicParsing="false" onAction="#signUp" prefHeight="50.0" style="-fx-background-color: #3897f0;" text="Sign up" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <Button fx:id="signUpButton" layoutX="20.0" layoutY="691.0" mnemonicParsing="false" onAction="#signUp" prefHeight="50.0" style="-fx-background-color: #3897f0;" text="Next" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="680.0">
             <font>
                 <Font name="Helvetica Bold" size="15.0" />
             </font>
@@ -49,10 +54,5 @@
                 <Font name="Helvetica Bold" size="15.0" />
             </font>
         </Hyperlink>
-      <Label alignment="CENTER" layoutX="254.0" layoutY="459.0" text="ENTER EMAIL, USERNAME, PASSWORD" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
-         <font>
-            <Font name="Helvetica Bold" size="15.0" />
-         </font>
-      </Label>
     </children>
 </AnchorPane>

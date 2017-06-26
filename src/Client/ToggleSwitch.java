@@ -39,10 +39,6 @@ public class ToggleSwitch extends Parent{
         trigger.setCenterY(17.5);
         trigger.setFill(Color.WHITE);
 
-//        DropShadow shadow = new DropShadow();
-//        shadow.setRadius(15);
-//        trigger.setEffect(shadow);
-
         translateAnimation.setNode(trigger);
         fillAnimation.setShape(background);
 

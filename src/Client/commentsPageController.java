@@ -110,7 +110,7 @@ public class commentsPageController implements Initializable {
         Client.clientOutputStream.writeUTF("ViewComments:" + postOwnerUsername + ":" + postId);
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Comments");
     }
 
@@ -118,7 +118,7 @@ public class commentsPageController implements Initializable {
         Client.clientOutputStream.writeUTF("Home");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Home");
     }
 
@@ -126,7 +126,7 @@ public class commentsPageController implements Initializable {
         Client.clientOutputStream.writeUTF("Profile1");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Profile");
     }
 
@@ -139,7 +139,7 @@ public class commentsPageController implements Initializable {
                 Client.clientOutputStream.writeUTF("#PeoplePage:"+p.username);
                 Client.clientOutputStream.flush();
                 Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));
-                scene.getStylesheets().add("Stylesheet/style.css");
+                scene.getStylesheets().add("Client/style.css");
                 ClientUI.sceneChanger(scene, "People");
             }
         } catch (IOException e) {

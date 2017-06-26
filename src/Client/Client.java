@@ -18,10 +18,6 @@ public class Client {
 
     public Client() throws IOException, ClassNotFoundException {
         connect(Server.SERVER_PORT);
-//        String message = "";
-//        while (!message.equals("Exit")){
-//        }
-//        disconnect();
     }
 
     static void connect(int port) {

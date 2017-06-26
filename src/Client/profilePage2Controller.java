@@ -48,7 +48,7 @@ public class profilePage2Controller implements Initializable {
         Client.clientOutputStream.writeUTF("Profile1");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Profile");
     }
     public void goToProfile2() throws IOException, ClassNotFoundException
@@ -56,7 +56,7 @@ public class profilePage2Controller implements Initializable {
         Client.clientOutputStream.writeUTF("Profile2");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage2.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Profile");
     }
 
@@ -64,7 +64,7 @@ public class profilePage2Controller implements Initializable {
         Client.clientOutputStream.writeUTF("Home");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Home");
     }
 
@@ -72,7 +72,7 @@ public class profilePage2Controller implements Initializable {
         Client.clientOutputStream.writeUTF("Search");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("searchPage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Search");
     }
 
@@ -81,7 +81,7 @@ public class profilePage2Controller implements Initializable {
         Client.clientOutputStream.writeUTF("Share");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Share");
     }
 
@@ -90,8 +90,16 @@ public class profilePage2Controller implements Initializable {
         Client.clientOutputStream.writeUTF("#News");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Activity");
+    }
+
+    public void goToEditProfile() throws IOException {
+        Client.clientOutputStream.writeUTF("#EditPage");
+        Client.clientOutputStream.flush();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("editPage.fxml")));
+        scene.getStylesheets().add("Client/style.css");
+        ClientUI.sceneChanger(scene, "Edit Profile");
     }
 
     @Override
@@ -119,7 +127,7 @@ public class profilePage2Controller implements Initializable {
             post.setPadding(new Insets(0));
             HBox postOwnerHBox = new HBox(10);
             postOwnerHBox.setAlignment(Pos.CENTER_LEFT);
-            Circle postOwnerProfilePicture = new Circle(20,new ImagePattern(new Image(p.owner.profilePicture.toURI().toString())));
+            Circle postOwnerProfilePicture = new Circle(30,new ImagePattern(new Image(p.owner.profilePicture.toURI().toString())));
             Hyperlink postOwnerUsername = new Hyperlink(p.owner.username);
             postOwnerUsername.setOnAction(event -> {
                 try {
@@ -143,7 +151,15 @@ public class profilePage2Controller implements Initializable {
             postImageView.setFitHeight(500);
             HBox postButtonsHBox = new HBox(10);
             postButtonsHBox.setAlignment(Pos.CENTER_LEFT);
-            ImageView likeButtonImageView = new ImageView("Client/Assets/likeButton.png");
+            ImageView likeButtonImageView = null;
+            if (p.liked.contains(Client.profileOwner))
+            {
+                likeButtonImageView = new ImageView("Client/Assets/likeButton2.png");
+            }
+            else
+            {
+                likeButtonImageView = new ImageView("Client/Assets/likeButton1.png");
+            }
             likeButtonImageView.setPickOnBounds(true);
             likeButtonImageView.setFitWidth(45);
             likeButtonImageView.setFitHeight(45);
@@ -159,7 +175,7 @@ public class profilePage2Controller implements Initializable {
                         Client.clientOutputStream.writeUTF(command);
                         Client.clientOutputStream.flush();
                         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
-                        scene.getStylesheets().add("Stylesheet/style.css");
+                        scene.getStylesheets().add("Client/style.css");
                         ClientUI.sceneChanger(scene, "Comments");
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -186,7 +202,7 @@ public class profilePage2Controller implements Initializable {
                     Client.clientOutputStream.writeUTF(command);
                     Client.clientOutputStream.flush();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("likesPage.fxml")));
-                    scene.getStylesheets().add("Stylesheet/style.css");
+                    scene.getStylesheets().add("Client/style.css");
                     ClientUI.sceneChanger(scene, "Likes");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -218,7 +234,7 @@ public class profilePage2Controller implements Initializable {
                             Client.clientOutputStream.writeUTF(command);
                             Client.clientOutputStream.flush();
                             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
-                            scene.getStylesheets().add("Stylesheet/style.css");
+                            scene.getStylesheets().add("Client/style.css");
                             ClientUI.sceneChanger(scene, "Comments");
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -245,7 +261,7 @@ public class profilePage2Controller implements Initializable {
                             Client.clientOutputStream.writeUTF(command);
                             Client.clientOutputStream.flush();
                             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("commentsPage.fxml")));
-                            scene.getStylesheets().add("Stylesheet/style.css");
+                            scene.getStylesheets().add("Client/style.css");
                             ClientUI.sceneChanger(scene, "Comments");
                         } catch (IOException e) {
                             e.printStackTrace();

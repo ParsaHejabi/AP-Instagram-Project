@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.editPageController">
     <children>
-      <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+      <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#goToProfile1" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
          <image>
             <Image url="@Assets/cancel.png" />
          </image>
@@ -24,7 +24,7 @@
                 <Font name="Helvetica" size="25.0" />
             </font>
         </Label>
-        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <ImageView fitHeight="40.0" fitWidth="40.0" onMouseClicked="#edit" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
             <image>
                 <Image url="@Assets/checkButtonBlue.png" />
             </image>

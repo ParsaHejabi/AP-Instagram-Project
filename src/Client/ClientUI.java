@@ -19,7 +19,7 @@ public class ClientUI extends Application{
         this.primaryStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("ClientUI.fxml"));
         mainScene = new Scene(root);
-        mainScene.getStylesheets().add("Stylesheet/style.css");
+        mainScene.getStylesheets().add("Client/style.css");
         primaryStage.setTitle("Client");
         primaryStage.setScene(mainScene);
         primaryStage.show();

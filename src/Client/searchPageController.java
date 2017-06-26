@@ -99,7 +99,7 @@ public class searchPageController implements Initializable{
         Client.clientOutputStream.writeUTF("People:" + p.username);
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("peoplePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "People");
     }
 
@@ -108,7 +108,7 @@ public class searchPageController implements Initializable{
         Client.clientOutputStream.writeUTF("Home");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Home");
     }
 
@@ -117,7 +117,7 @@ public class searchPageController implements Initializable{
         Client.clientOutputStream.writeUTF("Profile1");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("profilePage1.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Profile");
     }
 
@@ -126,7 +126,7 @@ public class searchPageController implements Initializable{
         Client.clientOutputStream.writeUTF("Share");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("sharePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Share");
     }
 
@@ -135,7 +135,7 @@ public class searchPageController implements Initializable{
         Client.clientOutputStream.writeUTF("#News");
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("newsPage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Activity");
     }
 }

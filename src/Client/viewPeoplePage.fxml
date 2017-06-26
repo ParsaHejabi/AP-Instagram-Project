@@ -28,17 +28,17 @@
         </ImageView>
         <Line endX="540.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="879.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="80.0" />
         <Circle fx:id="profilePicture" fill="WHITE" layoutX="119.0" layoutY="199.0" radius="65.0" stroke="#c7c7c7" strokeType="INSIDE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="120.0" />
-        <Label fx:id="postNum" layoutX="213.0" layoutY="130.0" text="Label" textAlignment="CENTER" AnchorPane.leftAnchor="213.0" AnchorPane.topAnchor="130.0">
+        <Label fx:id="postNum" alignment="CENTER" contentDisplay="CENTER" layoutX="235.0" layoutY="130.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="235.0" AnchorPane.topAnchor="130.0">
             <font>
                 <Font name="Helvetica Bold" size="20.0" />
             </font>
         </Label>
-        <Label fx:id="followingNum" layoutX="431.0" layoutY="130.0" text="Label" textAlignment="CENTER" AnchorPane.topAnchor="130.0">
+        <Label fx:id="followerNum" alignment="CENTER" contentDisplay="CENTER" layoutX="342.0" layoutY="130.0" text="0" textAlignment="CENTER" AnchorPane.topAnchor="130.0">
             <font>
                 <Font name="Helvetica Bold" size="20.0" />
             </font>
         </Label>
-        <Label fx:id="followerNum" layoutX="321.0" layoutY="131.0" text="Label" textAlignment="CENTER" AnchorPane.topAnchor="131.0">
+        <Label fx:id="followingNum" alignment="CENTER" contentDisplay="CENTER" layoutX="451.0" layoutY="130.0" text="0" textAlignment="CENTER" AnchorPane.topAnchor="130.0">
             <font>
                 <Font name="Helvetica Bold" size="20.0" />
             </font>

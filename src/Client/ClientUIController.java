@@ -51,7 +51,7 @@ public class ClientUIController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Login");
     }
 
@@ -62,7 +62,7 @@ public class ClientUIController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Sign Up");
     }
 
@@ -88,7 +88,7 @@ public class ClientUIController {
             String serverResponse = clientInputStream.readUTF();
             if (serverResponse.equals("Correct")){
                 Scene scene = new Scene(FXMLLoader.load(getClass().getResource("signupPage2.fxml")));
-                scene.getStylesheets().add("Stylesheet/style.css");
+                scene.getStylesheets().add("Client/style.css");
                 ClientUI.sceneChanger(scene, "Sign Up");
             }
             else if (serverResponse.equals("Username")){
@@ -119,7 +119,7 @@ public class ClientUIController {
         Client.clientOutputStream.writeUTF(biography);
         Client.clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("signupPage3.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Set ProfilePicture");
 
     }
@@ -149,7 +149,7 @@ public class ClientUIController {
         clientOutputStream.writeUTF("Home");
         clientOutputStream.flush();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-        scene.getStylesheets().add("Stylesheet/style.css");
+        scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "Home");
     }
     public void logIn() throws IOException, ClassNotFoundException {
@@ -167,7 +167,7 @@ public class ClientUIController {
             clientOutputStream.writeUTF("Home");
             clientOutputStream.flush();
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("homePage.fxml")));
-            scene.getStylesheets().add("Stylesheet/style.css");
+            scene.getStylesheets().add("Client/style.css");
             ClientUI.sceneChanger(scene, "Home");
         }
         else {
