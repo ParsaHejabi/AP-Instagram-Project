@@ -332,6 +332,10 @@ public class ClientHandler implements Runnable{
                     String requestedUsername = clientMessage.split(":",2)[1];
                     Profile requestedProfile = profileFinder(requestedUsername);
 
+                    clientOutputStream.reset();
+                    clientOutputStream.writeObject(requestedProfile);
+                    clientOutputStream.flush();
+
                 }
             }while (!clientMessage.equals("Exit"));
 
