@@ -1,14 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Client.EditPage"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="960.0" maxWidth="540.0" minHeight="960.0" minWidth="540.0" prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.editPageController">
+    <children>
+      <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+         <image>
+            <Image url="@Assets/cancel.png" />
+         </image>
+      </ImageView>
+        <Label fx:id="username" text="Edit Profile" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="25.0">
+            <font>
+                <Font name="Helvetica" size="25.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <image>
+                <Image url="@Assets/checkButtonBlue.png" />
+            </image>
+        </ImageView>
+        <Line endX="540.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="879.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="80.0" />
+        <Circle fx:id="previewProfilePictureCircle" fill="WHITE" layoutX="119.0" layoutY="199.0" radius="60.0" stroke="#c7c7c7" strokeType="INSIDE" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="210.0" AnchorPane.topAnchor="100.0" />
+      <Hyperlink fx:id="addAPhotoHyperLink" text="Change Photo" textFill="#3897f0" AnchorPane.leftAnchor="217.0" AnchorPane.topAnchor="230.0">
+         <font>
+            <Font name="Helvetica" size="15.0" />
+         </font>
+      </Hyperlink>
+      <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="287.0">
+         <image>
+            <Image url="@Assets/details.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="fullnameTextField" promptText="Name" style="-fx-background-color: #f4f4f4;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="287.0">
+         <font>
+            <Font name="Helvetica" size="17.0" />
+         </font>
+      </TextField>
+        <Line endX="500.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="339.0" />
+      <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="359.0">
+         <image>
+            <Image url="@Assets/quote.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="biographyTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Bio" style="-fx-background-color: #f4f4f4; -fx-border-color: #f4f4f4;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="359.0">
+         <font>
+            <Font name="Helvetica" size="17.0" />
+         </font>
+      </TextArea>
+      <Line endX="500.0" layoutX="290.0" layoutY="770.0" stroke="#c7c7c7" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="579.0" />
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="599.0">
+         <image>
+            <Image url="@Assets/pass.png" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="passwordPasswordField" style="-fx-background-color: #f4f4f4;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="599.0">
+         <font>
+            <Font name="Helvetica" size="17.0" />
+         </font>
+      </PasswordField>
+        <Line endX="540.0" layoutX="270.0" layoutY="750.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="879.0" />
+        <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/offHome.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToSearch" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="131.0" AnchorPane.rightAnchor="464.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/offExplore.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToShare" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="353.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/offShare.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="56.0" fitWidth="56.0" onMouseClicked="#goToNews" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="353.0" AnchorPane.rightAnchor="131.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/offNews.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="106.0" layoutY="889.0" onMouseClicked="#goToProfile1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="464.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="892.0">
+            <image>
+                <Image url="@Assets/onProfile.png" />
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>

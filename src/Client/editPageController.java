@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class editPageController implements Initializable {
 
     @FXML
-    private Circle previewProfilePictreCircle;
+    private Circle previewProfilePictureCircle;
     @FXML
     private Hyperlink addAPhotoHyperLink;
     @FXML
@@ -42,7 +42,7 @@ public class editPageController implements Initializable {
         {
             e.printStackTrace();
         }
-        previewProfilePictreCircle.setFill(new ImagePattern(new Image(Client.profileOwner.profilePicture.toURI().toString())));
+        previewProfilePictureCircle.setFill(new ImagePattern(new Image(Client.profileOwner.profilePicture.toURI().toString())));
 
         addAPhotoHyperLink.setOnAction(event -> {
 
@@ -55,11 +55,11 @@ public class editPageController implements Initializable {
 
             if(ax == null)
             {
-                previewProfilePictreCircle.setFill(new ImagePattern(new Image(Client.profileOwner.profilePicture.toURI().toString())));
+                previewProfilePictureCircle.setFill(new ImagePattern(new Image(Client.profileOwner.profilePicture.toURI().toString())));
             }
             else
             {
-                previewProfilePictreCircle.setFill(new ImagePattern(new Image(Client.profileOwner.profilePicture.toURI().toString())));
+                previewProfilePictureCircle.setFill(new ImagePattern(new Image(Client.profileOwner.profilePicture.toURI().toString())));
             }
         });
 
