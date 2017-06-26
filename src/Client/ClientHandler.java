@@ -326,11 +326,12 @@ public class ClientHandler implements Runnable{
                         Server.serialize(requestedProfile);
                         Server.serialize(currentClient);
                     }
+                }
+                if (clientMessage.contains("#PeoplePage:"))
+                {
+                    String requestedUsername = clientMessage.split(":",2)[1];
+                    Profile requestedProfile = profileFinder(requestedUsername);
 
-                    if (clientMessage.contains("#PeoplePage:"))
-                    {
-                        String requestedUsername = clientMessage.split(":",2)[1];
-                    }
                 }
             }while (!clientMessage.equals("Exit"));
 
