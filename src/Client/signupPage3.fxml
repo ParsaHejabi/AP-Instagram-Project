@@ -24,7 +24,7 @@
             <Font name="Helvetica" size="20.0" />
          </font>
       </Label>
-        <Button fx:id="addAPhotoButton" layoutX="20.0" layoutY="531.0" mnemonicParsing="false" onAction="#selectPicture" prefHeight="55.0" style="-fx-background-color: #f4f4f4; -fx-border-color: #c7c7c7;" text="Add a Photo" textFill="#c7c7c7" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="530.0">
+        <Button fx:id="addAPhotoButton" layoutX="20.0" layoutY="531.0" mnemonicParsing="false" onAction="#selectPicture" prefHeight="55.0" style="-fx-background-color: #3897f0;" text="Add a Photo" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="530.0">
             <font>
                 <Font name="Helvetica Bold" size="17.0" />
             </font>
