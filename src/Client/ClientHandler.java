@@ -167,6 +167,7 @@ public class ClientHandler implements Runnable{
                 }
                 if (clientMessage.equals("Search"))
                 {String userCommand;
+                    previousState = "Search";
                     System.out.println("in search mode");
                     do{
                         userCommand = clientInputStream.readUTF();
@@ -182,44 +183,6 @@ public class ClientHandler implements Runnable{
                                 clientOutputStream.flush();
                             }
                         }
-                        if(userCommand.contains("People"))
-                        {
-                            Profile currentClient = profileFinder(username);
-                            refreshClientOwner(currentClient);
-                            String peopleUsername = userCommand.split(":", 2)[1];
-                            Profile requestedProfile = profileFinder(peopleUsername);
-                            clientOutputStream.reset();
-                            clientOutputStream.writeObject(requestedProfile);
-                            clientOutputStream.flush();
-
-
-                            userCommand = clientInputStream.readUTF();
-                            if (userCommand.contains("FollowUnfollow"))
-                            {
-                                if(currentClient.following.contains(requestedProfile))
-                                {
-                                    currentClient.following.remove(requestedProfile);
-                                    requestedProfile.followers.remove(currentClient);
-                                    News news = new News(currentClient, "FollowNews", null, null);
-                                    Server.deleteNews(requestedProfile, news);
-                                    News news2 = new News(currentClient, "UnFollowNews", null, null);
-                                    System.out.println(news2.owner.username + "   " + requestedProfile.username);
-                                    Server.createNews(requestedProfile, news2);
-                                    Server.serialize(requestedProfile);
-                                    Server.serialize(currentClient);
-                                }
-                                else {
-                                    currentClient.following.add(requestedProfile);
-                                    requestedProfile.followers.add(currentClient);
-                                    News news = new News(currentClient, "UnFollowNews", null, null);
-                                    Server.deleteNews(requestedProfile, news);
-                                    News news2 = new News(currentClient, "FollowNews", null, null);
-                                    System.out.println(news2.owner.username + "   " + requestedProfile.username);
-                                    Server.createNews(requestedProfile, news2);
-                                    Server.serialize(requestedProfile);
-                                    Server.serialize(currentClient);
-                                }
-                            }}
 
 
 
@@ -334,6 +297,19 @@ public class ClientHandler implements Runnable{
                     }
                 }
                 if (clientMessage.contains("#PeoplePage:"))
+                {
+                    clientOutputStream.reset();
+                    clientOutputStream.writeUTF(previousState);
+                    clientOutputStream.flush();
+                    String requestedUsername = clientMessage.split(":",2)[1];
+                    Profile requestedProfile = profileFinder(requestedUsername);
+
+                    clientOutputStream.reset();
+                    clientOutputStream.writeObject(requestedProfile);
+                    clientOutputStream.flush();
+
+                }
+                if (clientMessage.contains("#PeoplePage2:"))
                 {
                     clientOutputStream.reset();
                     clientOutputStream.writeUTF(previousState);
