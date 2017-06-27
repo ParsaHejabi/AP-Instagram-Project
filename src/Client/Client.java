@@ -20,18 +20,21 @@ public class Client {
         connect(Server.SERVER_PORT);
     }
 
-    static void connect(int port) {
+    static boolean connect(int port){
+
         try {
             clientSocket = new Socket("localhost", port);
-
             System.out.println("connected to the " + clientSocket.getInetAddress().getHostAddress());
             System.out.println("setting io streams...");
             clientInputStream = new ObjectInputStream(clientSocket.getInputStream());
             clientOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             System.out.println("has been set.");
-        } catch (Exception e) {
-            e.printStackTrace();
+            return true;
+        } catch (IOException e) {
+            return false;
         }
+
+
     }
 
     static void sendMessage(String message) {

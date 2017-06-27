@@ -42,7 +42,6 @@ public class ClientHandler implements Runnable{
                 clientMessage = clientInputStream.readUTF();
                 System.out.println(Thread.currentThread().getName() + " said: " + clientMessage);
                 if (clientMessage.equals("Login")){
-                    System.out.println("Logging in...");
                     String usernameOrEmail = clientInputStream.readUTF();
                     String password = clientInputStream.readUTF();
                     if (isEmailValid(usernameOrEmail)){
@@ -70,7 +69,6 @@ public class ClientHandler implements Runnable{
                     }
                 }
                 else if (clientMessage.equals("Signup")){
-                    System.out.println("Singing up...");
                     String email = clientInputStream.readUTF();
                     String username = clientInputStream.readUTF();
                     String password = clientInputStream.readUTF();
@@ -121,252 +119,285 @@ public class ClientHandler implements Runnable{
 
             }while (!clientMessage.equals("Exit"));
             String previousState = null;
-            do {
-                clientMessage = clientInputStream.readUTF();
-                System.out.println(clientMessage);
-                refreshClientOwner(profileFinder(username));
-                if (clientMessage.equals("Profile1"))
-                {
-                    Profile currentClient = profileFinder(username);
-                    ArrayList<Post> postsToShow = new ArrayList<>();
-                    for (Post post: currentClient.posts){
-                        postsToShow.add(post);
-                    }
-                    clientOutputStream.reset();
-                    clientOutputStream.writeObject(postsToShow);
-                    clientOutputStream.flush();
-                }
-                if ( clientMessage.equals("Profile2"))
-                {
-                    Profile currentClient = profileFinder(username);
-                    ArrayList<Post> postsToShow = new ArrayList<>();
-                    for (Post post: currentClient.posts){
-                        postsToShow.add(post);
-                    }
-                    clientOutputStream.reset();
-                    clientOutputStream.writeObject(postsToShow);
-                    clientOutputStream.flush();
-                }
-                if (clientMessage.equals("Home"))
-                {
-                    previousState = clientMessage;
-                    Profile currentClient = profileFinder(username);
-                    ArrayList<Post> postsToShow = new ArrayList<>();
-                    for (Profile profile: currentClient.following){
-                        for (Post post: profile.posts){
+
+            if(!clientMessage.equals("Exit")) {
+                System.out.println(Thread.currentThread().getName() + " logged in sucessfully with " + username + "username");
+
+                do {
+                    clientMessage = clientInputStream.readUTF();
+                    System.out.println(username + " said: " + clientMessage);
+                    refreshClientOwner(profileFinder(username));
+                    if (clientMessage.equals("Profile1")) {
+                        Profile currentClient = profileFinder(username);
+                        ArrayList<Post> postsToShow = new ArrayList<>();
+                        for (Post post : currentClient.posts) {
                             postsToShow.add(post);
                         }
+                        clientOutputStream.reset();
+                        clientOutputStream.writeObject(postsToShow);
+                        clientOutputStream.flush();
                     }
-                    for (Post post: currentClient.posts){
-                        postsToShow.add(post);
+                    if (clientMessage.equals("Profile2")) {
+                        Profile currentClient = profileFinder(username);
+                        ArrayList<Post> postsToShow = new ArrayList<>();
+                        for (Post post : currentClient.posts) {
+                            postsToShow.add(post);
+                        }
+                        clientOutputStream.reset();
+                        clientOutputStream.writeObject(postsToShow);
+                        clientOutputStream.flush();
                     }
-                    postsToShow.sort(null);
-                    clientOutputStream.reset();
-                    clientOutputStream.writeObject(postsToShow);
-                    clientOutputStream.flush();
-                }
-                if (clientMessage.equals("Search"))
-                {String userCommand;
-                    previousState = "Search";
-                    System.out.println("in search mode");
-                    do{
-                        userCommand = clientInputStream.readUTF();
-
-                        if (userCommand.contains("SearchProfile")) {
-                            String searchedToken = userCommand.split(":", 2)[1];
-                            if (searchedToken.length() > 2)
-                            {
-                                Profile searchingClient = profileFinder(username);
-                                ArrayList<Profile> searchedProfile = Server.search(searchedToken, searchingClient);
-                                clientOutputStream.reset();
-                                clientOutputStream.writeObject(searchedProfile);
-                                clientOutputStream.flush();
+                    if (clientMessage.equals("Home")) {
+                        previousState = clientMessage;
+                        Profile currentClient = profileFinder(username);
+                        ArrayList<Post> postsToShow = new ArrayList<>();
+                        for (Profile profile : currentClient.following) {
+                            for (Post post : profile.posts) {
+                                postsToShow.add(post);
                             }
                         }
-
-
-
-                    }while (!userCommand.equals("Exit"));
-                }
-                if(clientMessage.equals("Share"))
-                {
-                    clientMessage = clientInputStream.readUTF();
-                    if (clientMessage.equals("SharePost"))
-                    {
-                        Profile curentClient = profileFinder(username);
-                        File f = ((File) clientInputStream.readObject());
-                        String caption = clientInputStream.readUTF();
-                        boolean canComment = clientInputStream.readBoolean();
-                        Server.createPost(curentClient,f, canComment, caption);
+                        for (Post post : currentClient.posts) {
+                            postsToShow.add(post);
+                        }
+                        postsToShow.sort(null);
+                        clientOutputStream.reset();
+                        clientOutputStream.writeObject(postsToShow);
+                        clientOutputStream.flush();
                     }
+                    if (clientMessage.equals("Search")) {
+
+                        String userCommand;
+                        previousState = "Search";
+                        System.out.println(username + "in search mode");
+                        ClientUI.primaryStage.setOnCloseRequest(event -> {
+
+                            try {
 
 
-                }
-                if(clientMessage.contains("Like:"))
-                {
-                    //token0 Like hast, token1 profile hast, token2 post identifier hast.
-                    String[] tokens = clientMessage.split(":",3);
-                    Profile currentClient = profileFinder(username);
-                    Profile requestedClient = profileFinder(tokens[1]);
-                    Post requestedPost = postFinder(requestedClient, tokens[2]);
-                    if(requestedPost.liked.contains(currentClient))
-                    {
-                        News news = new News(currentClient, "LikeNews", requestedPost, null);
-                        Server.deleteNews(requestedClient, news);
-                        requestedPost.liked.remove(currentClient);
+                                Client.clientOutputStream.writeUTF("Exit");
+                                Client.clientOutputStream.flush();
+                                Client.clientOutputStream.writeUTF("Exit");
+                                Client.clientOutputStream.flush();
+                                Client.refreshOwner();
+                                Client.disconnect();
+
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                        do {
+                            userCommand = clientInputStream.readUTF();
+
+                            if (userCommand.contains("SearchProfile")) {
+                                String searchedToken = userCommand.split(":", 2)[1];
+                                if (searchedToken.length() > 2) {
+                                    Profile searchingClient = profileFinder(username);
+                                    ArrayList<Profile> searchedProfile = Server.search(searchedToken, searchingClient);
+                                    clientOutputStream.reset();
+                                    clientOutputStream.writeObject(searchedProfile);
+                                    clientOutputStream.flush();
+                                }
+                            }
+
+
+                        } while (!userCommand.equals("Exit"));
                     }
-                    else
-                    {
-                        News news = new News(currentClient, "LikeNews", requestedPost, null);
+                    ClientUI.primaryStage.setOnCloseRequest(event -> {
+
+                        try {
+
+
+                            Client.clientOutputStream.writeUTF("Exit");
+                            Client.clientOutputStream.flush();
+                            Client.refreshOwner();
+                            Client.disconnect();
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    if (clientMessage.equals("Share")) {
+                        clientMessage = clientInputStream.readUTF();
+                        if (clientMessage.equals("SharePost")) {
+                            Profile curentClient = profileFinder(username);
+                            File f = ((File) clientInputStream.readObject());
+                            String caption = clientInputStream.readUTF();
+                            boolean canComment = clientInputStream.readBoolean();
+                            Server.createPost(curentClient, f, canComment, caption);
+                        }
+
+
+                    }
+                    if (clientMessage.contains("Like:")) {
+                        //token0 Like hast, token1 profile hast, token2 post identifier hast.
+                        String[] tokens = clientMessage.split(":", 3);
+                        Profile currentClient = profileFinder(username);
+                        Profile requestedClient = profileFinder(tokens[1]);
+                        Post requestedPost = postFinder(requestedClient, tokens[2]);
+                        if (requestedPost.liked.contains(currentClient)) {
+                            News news = new News(currentClient, "LikeNews", requestedPost, null);
+                            Server.deleteNews(requestedClient, news);
+                            requestedPost.liked.remove(currentClient);
+                        } else {
+                            News news = new News(currentClient, "LikeNews", requestedPost, null);
+                            Server.createNews(requestedClient, news);
+                            requestedPost.liked.add(currentClient);
+                        }
+                        Server.serialize(requestedClient);
+
+                    }
+                    if (clientMessage.contains("ViewLikes:")) {
+                        //token0 ViewLikes hast, token1 profile hast, token2 post identifier hast.
+                        String[] tokens = clientMessage.split(":", 3);
+                        Profile requestedClient = profileFinder(tokens[1]);
+                        Post requestedPost = postFinder(requestedClient, tokens[2]);
+                        clientOutputStream.reset();
+                        clientOutputStream.writeObject(requestedPost.liked);
+                        clientOutputStream.flush();
+                    }
+                    if (clientMessage.contains("ViewComments:")) {
+                        String[] tokens = clientMessage.split(":", 3);
+                        Profile requestedClient = profileFinder(tokens[1]);
+                        Post requestedPost = postFinder(requestedClient, tokens[2]);
+                        clientOutputStream.reset();
+                        clientOutputStream.writeObject(requestedPost.comments);
+                        clientOutputStream.flush();
+                        clientOutputStream.writeUTF(tokens[1]);
+                        clientOutputStream.flush();
+                        clientOutputStream.writeUTF(tokens[2]);
+                        clientOutputStream.flush();
+                    }
+                    if (clientMessage.contains("SendComment:")) {
+                        //token aval send comment , dovom username taraf, sevom id post
+                        String[] tokens = clientMessage.split(":", 3);
+                        String commentText = clientInputStream.readUTF();
+                        Profile currentClient = profileFinder(username);
+                        Profile requestedClient = profileFinder(tokens[1]);
+                        Post requestedPost = postFinder(requestedClient, tokens[2]);
+                        Comment comment = new Comment(currentClient, commentText);
+                        requestedPost.comments.add(comment);
+                        News news = new News(currentClient, "CommentNews", requestedPost, commentText);
                         Server.createNews(requestedClient, news);
-                        requestedPost.liked.add(currentClient);
+                        Server.serialize(requestedClient);
                     }
-                    Server.serialize(requestedClient);
-
-                }
-                if(clientMessage.contains("ViewLikes:"))
-                {
-                    //token0 ViewLikes hast, token1 profile hast, token2 post identifier hast.
-                    String[] tokens = clientMessage.split(":",3);
-                    Profile requestedClient = profileFinder(tokens[1]);
-                    Post requestedPost = postFinder(requestedClient, tokens[2]);
-                    clientOutputStream.reset();
-                    clientOutputStream.writeObject(requestedPost.liked);
-                    clientOutputStream.flush();
-                }
-                if(clientMessage.contains("ViewComments:"))
-                {
-                    String[] tokens = clientMessage.split(":",3);
-                    Profile requestedClient = profileFinder(tokens[1]);
-                    Post requestedPost = postFinder(requestedClient, tokens[2]);
-                    clientOutputStream.reset();
-                    clientOutputStream.writeObject(requestedPost.comments);
-                    clientOutputStream.flush();
-                    clientOutputStream.writeUTF(tokens[1]);
-                    clientOutputStream.flush();
-                    clientOutputStream.writeUTF(tokens[2]);
-                    clientOutputStream.flush();
-                }
-                if(clientMessage.contains("SendComment:"))
-                {
-                    //token aval send comment , dovom username taraf, sevom id post
-                    String[] tokens = clientMessage.split(":",3);
-                    String commentText = clientInputStream.readUTF();
-                    Profile currentClient = profileFinder(username);
-                    Profile requestedClient = profileFinder(tokens[1]);
-                    Post requestedPost = postFinder(requestedClient, tokens[2]);
-                    Comment comment = new Comment(currentClient, commentText);
-                    requestedPost.comments.add(comment);
-                    News news = new News(currentClient, "CommentNews", requestedPost, commentText);
-                    Server.createNews(requestedClient, news);
-                    Server.serialize(requestedClient);
-                }
-                if(clientMessage.contains("#News"))
-                {
-                    previousState = clientMessage;
-                    clientOutputStream.reset();
-                    clientOutputStream.writeObject(profileFinder(username).news);
-                    clientOutputStream.flush();
-                }
-                if(clientMessage.contains("#FollowUnFollow:"))
-                {
-                    String[] tokens = clientMessage.split(":",2);
-                    Profile currentClient = profileFinder(username);
-                    Profile requestedProfile = profileFinder(tokens[1]);
-                    if(currentClient.following.contains(requestedProfile))
-                    {
-                        currentClient.following.remove(requestedProfile);
-                        requestedProfile.followers.remove(currentClient);
-                        System.out.println(currentClient.username);
-                        News news = new News(currentClient, "FollowNews", null, null);
-                        Server.deleteNews(requestedProfile, news);
-                        News news2 = new News(currentClient, "UnFollowNews", null, null);
-                        Server.createNews(requestedProfile, news2);
-                        Server.serialize(requestedProfile);
-                        Server.serialize(currentClient);
+                    if (clientMessage.contains("#News")) {
+                        previousState = clientMessage;
+                        clientOutputStream.reset();
+                        clientOutputStream.writeObject(profileFinder(username).news);
+                        clientOutputStream.flush();
                     }
-                    else {
-                        currentClient.following.add(requestedProfile);
-                        requestedProfile.followers.add(currentClient);
-                        News news = new News(currentClient, "UnFollowNews", null, null);
-                        Server.deleteNews(requestedProfile, news);
-                        News news2 = new News(currentClient, "FollowNews", null, null);
-                        Server.createNews(requestedProfile, news2);
-                        Server.serialize(requestedProfile);
-                        Server.serialize(currentClient);
-                    }
-                }
-                if (clientMessage.contains("#PeoplePage:"))
-                {
-                    clientOutputStream.reset();
-                    clientOutputStream.writeUTF(previousState);
-                    clientOutputStream.flush();
-                    String requestedUsername = clientMessage.split(":",2)[1];
-                    Profile requestedProfile = profileFinder(requestedUsername);
-
-                    clientOutputStream.reset();
-                    clientOutputStream.writeObject(requestedProfile);
-                    clientOutputStream.flush();
-
-                }
-                if (clientMessage.contains("#PeoplePage2:"))
-                {
-                    clientOutputStream.reset();
-                    clientOutputStream.writeUTF(previousState);
-                    clientOutputStream.flush();
-                    String requestedUsername = clientMessage.split(":",2)[1];
-                    Profile requestedProfile = profileFinder(requestedUsername);
-
-                    clientOutputStream.reset();
-                    clientOutputStream.writeObject(requestedProfile);
-                    clientOutputStream.flush();
-
-                }
-                if( clientMessage.contains("#EditPage"))
-                {
-                    String clientCommand = clientInputStream.readUTF();
-                    if (clientCommand.equals("#DoEdit"))
-                    {
-                        Profile profile = profileFinder(username);
-                        clientCommand = clientInputStream.readUTF();
-                        if (clientCommand.equals("#Yes"))
-                        {
-                            byte[] picBytes = ((byte[]) clientInputStream.readObject());
-                            Files.write(profile.profilePicture.toPath(),picBytes );
-                        }else
-                        {
-
-                        }
-                        clientCommand = clientInputStream.readUTF();
-                        if (clientCommand.equals("#Yes"))
-                        {
-                            profile.fullName = clientInputStream.readUTF();
-                        }else
-                        {
-
-                        }
-                        clientCommand = clientInputStream.readUTF();
-                        if (clientCommand.equals("#Yes"))
-                        {
-                            profile.biography = clientInputStream.readUTF();
-                        }else
-                        {
-
-                        }
-                        clientCommand = clientInputStream.readUTF();
-                        if (clientCommand.equals("#Yes"))
-                        {
-                            profile.password = clientInputStream.readUTF();
-                        }else
-                        {
-
+                    if (clientMessage.contains("#FollowUnFollow:")) {
+                        String[] tokens = clientMessage.split(":", 2);
+                        Profile currentClient = profileFinder(username);
+                        Profile requestedProfile = profileFinder(tokens[1]);
+                        if (currentClient.following.contains(requestedProfile)) {
+                            currentClient.following.remove(requestedProfile);
+                            requestedProfile.followers.remove(currentClient);
+                            System.out.println(currentClient.username);
+                            News news = new News(currentClient, "FollowNews", null, null);
+                            Server.deleteNews(requestedProfile, news);
+                            News news2 = new News(currentClient, "UnFollowNews", null, null);
+                            Server.createNews(requestedProfile, news2);
+                            Server.serialize(requestedProfile);
+                            Server.serialize(currentClient);
+                        } else {
+                            currentClient.following.add(requestedProfile);
+                            requestedProfile.followers.add(currentClient);
+                            News news = new News(currentClient, "UnFollowNews", null, null);
+                            Server.deleteNews(requestedProfile, news);
+                            News news2 = new News(currentClient, "FollowNews", null, null);
+                            Server.createNews(requestedProfile, news2);
+                            Server.serialize(requestedProfile);
+                            Server.serialize(currentClient);
                         }
                     }
-                }
-            }while (!clientMessage.equals("Exit"));
+                    if (clientMessage.contains("#PeoplePage:")) {
+                        clientOutputStream.reset();
+                        clientOutputStream.writeUTF(previousState);
+                        clientOutputStream.flush();
+                        String requestedUsername = clientMessage.split(":", 2)[1];
+                        Profile requestedProfile = profileFinder(requestedUsername);
 
+                        clientOutputStream.reset();
+                        clientOutputStream.writeObject(requestedProfile);
+                        clientOutputStream.flush();
+
+                    }
+                    if (clientMessage.contains("#PeoplePage2:")) {
+                        clientOutputStream.reset();
+                        clientOutputStream.writeUTF(previousState);
+                        clientOutputStream.flush();
+                        String requestedUsername = clientMessage.split(":", 2)[1];
+                        Profile requestedProfile = profileFinder(requestedUsername);
+
+                        clientOutputStream.reset();
+                        clientOutputStream.writeObject(requestedProfile);
+                        clientOutputStream.flush();
+
+                    }
+                    if (clientMessage.contains("#EditPage")) {
+                        String clientCommand = clientInputStream.readUTF();
+                        if (clientCommand.equals("#DoEdit")) {
+                            Profile profile = profileFinder(username);
+                            clientCommand = clientInputStream.readUTF();
+                            if (clientCommand.equals("#Yes")) {
+                                byte[] picBytes = ((byte[]) clientInputStream.readObject());
+                                Files.write(profile.profilePicture.toPath(), picBytes);
+                            } else {
+
+                            }
+                            clientCommand = clientInputStream.readUTF();
+                            if (clientCommand.equals("#Yes")) {
+                                profile.fullName = clientInputStream.readUTF();
+                            } else {
+
+                            }
+                            clientCommand = clientInputStream.readUTF();
+                            if (clientCommand.equals("#Yes")) {
+                                profile.biography = clientInputStream.readUTF();
+                            } else {
+
+                            }
+                            clientCommand = clientInputStream.readUTF();
+                            if (clientCommand.equals("#Yes")) {
+                                profile.password = clientInputStream.readUTF();
+                            } else {
+
+                            }
+                        }
+                    }
+                } while (!clientMessage.equals("Exit"));
+            }
+
+            clientOutputStream.close();
+            clientInputStream.close();
+            clientSocket.close();
             System.out.println(Thread.currentThread().getName() + " is closed!");
-        }catch (Exception e){
+
+
+        }catch (EOFException e){
+            System.out.println("Something Went Horribly Wrong, Closing the thread...");
+            try {
+                clientOutputStream.close();
+                clientInputStream.close();
+                clientSocket.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + " is closed!");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
