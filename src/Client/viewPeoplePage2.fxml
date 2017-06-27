@@ -76,12 +76,12 @@
         </Label>
         <Line endX="540.0" layoutX="280.0" layoutY="760.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="480.0" />
         <Line endX="540.0" layoutX="290.0" layoutY="770.0" stroke="#c7c7c7" AnchorPane.bottomAnchor="479.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="540.0" />
-        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="485.0">
+        <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#goToPeople" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="485.0">
             <image>
                 <Image url="@Assets/gridViewButton.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="485.0">
+        <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#goToPeople2" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="485.0">
             <image>
                 <Image url="@Assets/listViewButton.png" />
             </image>
