@@ -374,7 +374,7 @@ public class ClientHandler implements Runnable{
                     }
                 } while (!clientMessage.equals("Exit"));
             }
-
+            System.out.println("hello");
             clientOutputStream.close();
             clientInputStream.close();
             clientSocket.close();
