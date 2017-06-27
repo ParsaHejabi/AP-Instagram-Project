@@ -79,9 +79,9 @@ public class ClientUIController {
         if (isEmailValid(email)){
             Client.clientOutputStream.writeUTF("Signup");
             Client.clientOutputStream.flush();
-            Client.clientOutputStream.writeUTF(email);
+            Client.clientOutputStream.writeUTF(email.toLowerCase());
             Client.clientOutputStream.flush();
-            Client.clientOutputStream.writeUTF(username);
+            Client.clientOutputStream.writeUTF(username.toLowerCase());
             Client.clientOutputStream.flush();
             Client.clientOutputStream.writeUTF(password);
             Client.clientOutputStream.flush();
@@ -157,7 +157,7 @@ public class ClientUIController {
         String password = passwordLoginPasswordField.getText();
         Client.clientOutputStream.writeUTF("Login");
         Client.clientOutputStream.flush();
-        Client.clientOutputStream.writeUTF(usernameOrEmail);
+        Client.clientOutputStream.writeUTF(usernameOrEmail.toLowerCase());
         Client.clientOutputStream.flush();
         Client.clientOutputStream.writeUTF(password);
         Client.clientOutputStream.flush();

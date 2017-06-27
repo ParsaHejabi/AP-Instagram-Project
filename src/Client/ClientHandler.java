@@ -124,26 +124,11 @@ public class ClientHandler implements Runnable{
                 System.out.println(Thread.currentThread().getName() + " logged in sucessfully with " + username + "username");
 
                 do {
-                    ClientUI.primaryStage.setOnCloseRequest(event -> {
-
-                        try {
-
-
-                            Client.clientOutputStream.writeUTF("Exit");
-                            Client.clientOutputStream.flush();
-                            Client.refreshOwner();
-                            Client.disconnect();
-
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    });
                     clientMessage = clientInputStream.readUTF();
                     System.out.println(username + " said: " + clientMessage);
+
                     refreshClientOwner(profileFinder(username));
+
                     if (clientMessage.equals("Profile1")) {
                         Profile currentClient = profileFinder(username);
                         ArrayList<Post> postsToShow = new ArrayList<>();
@@ -186,25 +171,7 @@ public class ClientHandler implements Runnable{
                         String userCommand;
                         previousState = "Search";
                         System.out.println(username + "in search mode");
-                        ClientUI.primaryStage.setOnCloseRequest(event -> {
 
-                            try {
-
-
-                                Client.clientOutputStream.writeUTF("Exit");
-                                Client.clientOutputStream.flush();
-                                Client.clientOutputStream.writeUTF("Exit");
-                                Client.clientOutputStream.flush();
-                                Client.refreshOwner();
-                                Client.disconnect();
-
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                        });
                         do {
                             userCommand = clientInputStream.readUTF();
 
@@ -382,24 +349,18 @@ public class ClientHandler implements Runnable{
             System.out.println(Thread.currentThread().getName() + " is closed!");
 
 
-        }catch (EOFException e){
-            System.out.println("Something Went Horribly Wrong, Closing the thread...");
+        }
+        catch (Exception e)
+        {
+            System.out.println(Thread.currentThread().getName() + " disConnected!");
             try {
                 clientOutputStream.close();
                 clientInputStream.close();
                 clientSocket.close();
             } catch (IOException e1) {
-                e1.printStackTrace();
+
             }
             System.out.println(Thread.currentThread().getName() + " is closed!");
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
         }
     }
 
