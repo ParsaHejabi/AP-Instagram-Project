@@ -51,13 +51,11 @@ public class ClientUI extends Application{
 
                 Client.clientOutputStream.writeUTF("Exit");
                 Client.clientOutputStream.flush();
-                Client.refreshOwner();
+
                 Client.disconnect();
 
 
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });

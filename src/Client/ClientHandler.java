@@ -124,6 +124,23 @@ public class ClientHandler implements Runnable{
                 System.out.println(Thread.currentThread().getName() + " logged in sucessfully with " + username + "username");
 
                 do {
+                    ClientUI.primaryStage.setOnCloseRequest(event -> {
+
+                        try {
+
+
+                            Client.clientOutputStream.writeUTF("Exit");
+                            Client.clientOutputStream.flush();
+                            Client.refreshOwner();
+                            Client.disconnect();
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    });
                     clientMessage = clientInputStream.readUTF();
                     System.out.println(username + " said: " + clientMessage);
                     refreshClientOwner(profileFinder(username));
@@ -205,23 +222,7 @@ public class ClientHandler implements Runnable{
 
                         } while (!userCommand.equals("Exit"));
                     }
-                    ClientUI.primaryStage.setOnCloseRequest(event -> {
 
-                        try {
-
-
-                            Client.clientOutputStream.writeUTF("Exit");
-                            Client.clientOutputStream.flush();
-                            Client.refreshOwner();
-                            Client.disconnect();
-
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    });
                     if (clientMessage.equals("Share")) {
                         clientMessage = clientInputStream.readUTF();
                         if (clientMessage.equals("SharePost")) {
