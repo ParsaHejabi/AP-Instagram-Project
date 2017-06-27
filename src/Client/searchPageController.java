@@ -96,9 +96,10 @@ public class searchPageController implements Initializable{
     }
 
     private void goToPeople(Profile p) throws IOException, ClassNotFoundException {
-        Client.clientOutputStream.writeUTF("People:" + p.username);
+        Client.clientOutputStream.writeUTF("Exit");
+        Client.clientOutputStream.writeUTF("#PeoplePage:" + p.username);
         Client.clientOutputStream.flush();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("peoplePage.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("viewPeoplePage.fxml")));
         scene.getStylesheets().add("Client/style.css");
         ClientUI.sceneChanger(scene, "People");
     }

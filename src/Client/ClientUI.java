@@ -15,8 +15,10 @@ public class ClientUI extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Client.connect(Server.SERVER_PORT);
         this.primaryStage = primaryStage;
+
+
+        Client.connect(Server.SERVER_PORT);
         Parent root = FXMLLoader.load(getClass().getResource("ClientUI.fxml"));
         mainScene = new Scene(root);
         mainScene.getStylesheets().add("Client/style.css");
